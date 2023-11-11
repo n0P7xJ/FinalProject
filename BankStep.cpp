@@ -8,7 +8,7 @@ int main()
    
 
 
-
+int slovo = 5;
 
 
 
