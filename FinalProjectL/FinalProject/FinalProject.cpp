@@ -4,5 +4,11 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    //task
+
+    //це створює змінну n для чогось
+    int n = NULL;
+
+    system("pause");
+    return 0;
 }
