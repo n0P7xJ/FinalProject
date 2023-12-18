@@ -1,28 +1,24 @@
-﻿#include "SFML/Graphics.hpp"
-#include <iostream>
-#include <exception>
+﻿#include <SFML/Graphics.hpp>
 
+int main()
+{
+    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
+    sf::CircleShape shape(100.f);
+    shape.setFillColor(sf::Color::Green);
 
-int main(){
-    try {
-        sf::RenderWindow mainWindow;
-        mainWindow.create(sf::VideoMode(1024, 640), L"DailyTask");
-
-        while (mainWindow.isOpen()) {
-            sf::Event event;
-            while (mainWindow.pollEvent(event)) {
-                if (event.type == sf::Event::Closed) {
-                    mainWindow.close();
-                }
-            }
-
-
-
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
         }
-        system("pause");
-        return 0;
+
+        window.clear();
+        window.draw(shape);
+        window.display();
     }
-    catch (...) {
-        std::cerr << "Code have problem" << '\n';
-    }
+
+    return 0;
 }
