@@ -3,36 +3,18 @@
 #include <string>
 #include <exception>
 
-const sf::Font defaultFont = "Font/arial.ttf";
-const unsigned int defaultCharacterSize = 50;
-
-class textBox : public sf::RectangleShape{
-private:
-    sf::Text text;
+class TextBox : public sf::RectangleShape, public sf::Text {
 public:
-    TextBox(const sf::Vector2f& size, const sf::Vector2f& position, const std::string& content, const sf::Font& font = "Font/arial.ttf", unsigned int defaultCharacterSize = 50)
-        : sf::RectangleShape(size)
-    {
-        setFillColor(sf::Color::White);
-        setOutlineColor(sf::Color::Black);
-        setOutlineThickness(2.f);
-        setPosition(position);
+    TextBox(const sf::Vector2f& size, const sf::Vector2f& position, const std::string& content, const sf::Font& font = defaultFontText, const sf::Color& fillColor = defaultFillColorText, unsigned int characterSize = defaultCharacterSize);
 
-        text.setFont(font);
-        text.setString(content);
-        text.setCharacterSize(characterSize);
-        text.setFillColor(sf::Color::Black);
+    // Метод для задання властивостей прямокутника
+    void setRectangleProperties(const sf::Vector2f& size, const sf::Vector2f& position);
 
-        // Центруємо текст у прямокутнику
-        sf::FloatRect textBounds = text.getLocalBounds();
-        text.setOrigin(textBounds.left + textBounds.width / 2.f, textBounds.top + textBounds.height / 2.f);
-        text.setPosition(position.x + size.x / 2.f, position.y + size.y / 2.f);
-    }
-
-    void setText(const std::string& text){
-        if (text.isEmpty()) {
-            throw(std::expection("Text box: send empty text"));
-        }
-        text.setString(content)
-    }
+    // Метод для задання властивостей тексту
+    void setTextProperties(const std::string& content, const sf::Font& font, const sf::Color& fillColor = defaultFillColorText, unsigned int characterSize);
+private:
+    // Text default value
+    static const unsigned int defaultCharacterSize;
+    static const sf::Color defaultFillColorText;
+    static const sf::Font defaultFontText;
 };
