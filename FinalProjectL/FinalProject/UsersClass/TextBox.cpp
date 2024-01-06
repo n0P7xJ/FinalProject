@@ -10,16 +10,19 @@ const sf::Font TextBox::defaultFontText = [] {
     }
     return font;
 }();
+//Rectangle Default Value
+static const sf::Color defaultFillColorBox = sf::Color::White;
 
-TextBox::TextBox(const sf::Vector2f& size, const sf::Vector2f& position, const std::string& content, const sf::Font& font, const sf::Color& fillColor, unsigned int characterSize) {
-    setRectangleProperties(size, position);
+TextBox::TextBox(const sf::Vector2f& size, const sf::Vector2f& position, const std::string& content, const sf::Color& fillColorBox, const sf::Font& font, const sf::Color& fillColor, unsigned int characterSize) {
+    setRectangleProperties(size, position, fillColorBox);
     setTextProperties(content, font, fillColor, characterSize);
 }
 
-void TextBox::setRectangleProperties(const sf::Vector2f& size, const sf::Vector2f& position) {
+void TextBox::setRectangleProperties(const sf::Vector2f& size, const sf::Vector2f& position, const sf::Color fillColor) {
     sf::RectangleShape::setSize(size);
     sf::RectangleShape::setPosition(position);
-    sf::RectangleShape::setFillColor(sf::Color::White);
+    sf::RectangleShape::setFillColor(defaultFillColorBox);
+    // Настройка коліру вздовш ліній прямокутника
     /*sf::RectangleShape::setOutlineColor(sf::Color::Black);
     sf::RectangleShape::setOutlineThickness(2.0f);*/
 }
