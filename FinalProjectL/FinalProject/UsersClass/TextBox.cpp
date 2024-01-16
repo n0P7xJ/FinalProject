@@ -1,7 +1,8 @@
 #include "TextBox.h"
 
-//Text Default Value
-static const unsigned int defaultCharacterSize = 12;
+// Text default value
+const std::string TextBox::defaultString = "empty";
+const unsigned int TextBox::defaultCharacterSize = 12;
 const sf::Color TextBox::defaultFillColorText = sf::Color::Black;
 const sf::Font TextBox::defaultFontText = [] {
     sf::Font font;
@@ -10,24 +11,26 @@ const sf::Font TextBox::defaultFontText = [] {
     }
     return font;
 }();
-//Rectangle Default Value
-static const sf::Color defaultFillColorBox = sf::Color::White;
+// Rectangle default value
+const sf::Color TextBox::defaultFillColorBox = sf::Color::White;
+const sf::Vector2f TextBox::defaultSize = sf::Vector2f(0.f, 0.f);
+// Template default value
+const sf::Vector2f TextBox::defaultPosition = sf::Vector2f(0.f, 0.f);
 
-TextBox::TextBox(const sf::Vector2f& size, const sf::Vector2f& position, const std::string& content, const sf::Color& fillColorBox, const sf::Font& font, const sf::Color& fillColor, unsigned int characterSize) {
+
+TextBox::TextBox(const sf::Vector2f& size, const sf::Vector2f& position, const std::string& content, const sf::Color& fillColorBox, const sf::Font& font, const sf::Color& fillColor, const unsigned int& characterSize){
     setRectangleProperties(size, position, fillColorBox);
     setTextProperties(content, font, fillColor, characterSize);
 }
 
-void TextBox::setRectangleProperties(const sf::Vector2f& size, const sf::Vector2f& position, const sf::Color fillColor) {
+void TextBox::setRectangleProperties(const sf::Vector2f& size, const sf::Vector2f& position, const sf::Color& fillColor){
     sf::RectangleShape::setSize(size);
     sf::RectangleShape::setPosition(position);
     sf::RectangleShape::setFillColor(defaultFillColorBox);
-    // Настройка коліру вздовш ліній прямокутника
-    /*sf::RectangleShape::setOutlineColor(sf::Color::Black);
-    sf::RectangleShape::setOutlineThickness(2.0f);*/
 }
 
-void TextBox::setTextProperties(const std::string& content, const sf::Font& font = defaultFontText, const sf::Color& fillColor = defaultFillColorText, unsigned int characterSize = defaultCharacterSize) {
+void TextBox::setTextProperties(const std::string& content, const sf::Font& font, const sf::Color& fillColor, const unsigned int& characterSize)
+{
     sf::Text::setString(content);
     sf::Text::setFont(font);
     sf::Text::setFillColor(fillColor);

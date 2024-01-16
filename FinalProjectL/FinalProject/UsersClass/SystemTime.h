@@ -3,13 +3,14 @@
 #include <iostream>
 #include <Windows.h>
 
-class SystemTime : protected SYSTEMTIME{
+class SystemTime : public SYSTEMTIME{
 public:
 	int getHour() const;
-	/*int GetMinute() const { return minute; }
-	int GetSecond() const { return second; }
+	int getMinute() const;
+	int getSecond() const;
 
-	int GetDay() const { return day; }
+
+	/*int GetDay() const { return day; }
 	int GetMonth() const { return month; }
 	int GetYear() const { return year; }*/
 
