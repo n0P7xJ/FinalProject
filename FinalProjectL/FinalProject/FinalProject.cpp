@@ -1,56 +1,60 @@
-﻿
-#include <SFML/Graphics.hpp>
+﻿#include <SFML/Graphics.hpp>
 
-#include <iostream>
-#include <exception>
+#include <vector>
 
-#include "UsersClass/TextBox.h"
+#include "TextBox.h"
 
 int main(){
-    try {
-        sf::RenderWindow window(sf::VideoMode(1170, 768), "DailyTask");
+    sf::RenderWindow window(sf::VideoMode(1176, 768), "DailyTask");
 
-        // Створюю двухвимірний масив кнопок, для подальшого виводу на екран
-        const int LineHorizont = 7;
-        const int LineVertikal = 7;
-        sf::RectangleShape listRectangl[LineHorizont][LineVertikal]; // Статичний оскільки масив не буде міняти свої розміри
-        // sf::RectangleShape (*ptrListRectangle)[LineVertikal] = listRectangl; Вказівник на масив якщо буде потрібен нараз в коментарі
-        // Структура вказівника (вказівник на масив)[розмір масива], не створив динамічний оскільки розмір не буде мінятися
+    // Створюю двухвимірний масив кнопок, для подальшого виводу на екран
+    const int LineHorizont = 7;
+    const int LineVertikal = 7;
+    std::vector<std::vector<TextBox*>> listBoxWindow(LineHorizont,std::vector<TextBox*>(LineVertikal));
+    
+    // Тимчасовий варіант заповнення
 
-        // Тимчасовий варіант заповнення
+    TextBox MainBox(sf::Vector2f(1176, 96), sf::Vector2f(0, 0));
+    MainBox.sf::RectangleShape::setFillColor(sf::Color::Black);
 
-        sf::RectangleShape rectangleYearAndMouth;
-        // sf::RectangleShape* rectangleYearAndMourh;
-        rectangleYearAndMouth.setSize(sf::Vector2f(1170, 96));
-        rectangleYearAndMouth.setPosition(sf::Vector2f(0, 0));
-        rectangleYearAndMouth.setFillColor(sf::Color::Black);
-
-        /*for (int i = 0; i < LineHorizont; ++i) {
-            for (int j = 0; j < LineVertikal; ++j) {
-                TextBox box(sf::Vector2f(static_cast <float>(143), static_cast <float>(109)), sf::Vector2f(static_cast <float>(143 * i), static_cast<float> (109 * j)), "1");
-                listRectangl[i][j] = box;
-            }
-        }*/
+    //sf::RectangleShape rectangleYearAndMouth;
+    //// sf::RectangleShape* rectangleYearAndMourh;
+    //rectangleYearAndMouth.setSize(sf::Vector2f(1170, 96));
+    //rectangleYearAndMouth.setPosition(sf::Vector2f(0, 0));
+    //rectangleYearAndMouth.setFillColor(sf::Color::Black);
 
 
-        while (window.isOpen()) {
-            sf::Event event;
-            while (window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed)
-                    window.close();
-            }
-
-            window.clear(sf::Color::White);
-            window.draw(rectangleYearAndMouth);
-            //window.draw()
-            window.display();
+    for (int y = 0; y < LineHorizont; ++y) {
+        for (int x = 0; x < LineVertikal; ++x) {
+            listBoxWindow[y][x] = new TextBox(sf::Vector2f(168, 96), sf::Vector2f(168 * x, 96 * (y+1)),"Helloworld");
         }
-        return 0;
     }
-    catch (std::exception error) {
-        std::cerr << error.what() << std::endl;
+
+
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)){
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear(sf::Color::Black);
+        MainBox.draw(window);
+        for (int i = 0; i < LineHorizont; ++i) {
+            for (int j = 0; j < LineVertikal; ++j) {
+                listBoxWindow[i][j]->draw(window);
+            }
+        }
+        window.display();
     }
-    catch (...) {
-        std::cerr << "Error" << std::endl;
+    
+    for (int i = 0; i < LineHorizont; ++i) {
+        for (int j = 0; j < LineVertikal; ++j) {
+            delete listBoxWindow[i][j];
+        }
     }
+
+    listBoxWindow.clear();
+
+    return 0;
 }
