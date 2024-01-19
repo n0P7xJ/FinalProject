@@ -1,1 +1,12 @@
-﻿
+﻿D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003: The specified task executable "CL.exe" could not be run. System.IO.IOException: There is not enough space on the disk.
+D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003: 
+D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.FileStream.WriteCore(Byte[] buffer, Int32 offset, Int32 count)
+D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.FileStream.FlushWrite(Boolean calledFromFinalizer)
+D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.FileStream.Dispose(Boolean disposing)
+D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.Stream.Close()
+D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.StreamWriter.Dispose(Boolean disposing)
+D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.TextWriter.Dispose()
+D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at Microsoft.Build.Utilities.CanonicalTrackedInputFiles.SaveTlog(DependencyFilter includeInTLog)
+D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at Microsoft.Build.CPPTasks.CL.ComputeOutOfDateSources()
+D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at Microsoft.Build.Utilities.ToolTask.Execute()

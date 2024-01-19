@@ -15,7 +15,7 @@ int main(){
     // Тимчасовий варіант заповнення
 
     TextBox MainBox(sf::Vector2f(1176, 96), sf::Vector2f(0, 0));
-    MainBox.sf::RectangleShape::setFillColor(sf::Color::Black);
+    //MainBox.sf::RectangleShape::setFillColor(sf::Color::Black);
 
     //sf::RectangleShape rectangleYearAndMouth;
     //// sf::RectangleShape* rectangleYearAndMourh;
@@ -26,11 +26,11 @@ int main(){
 
     for (int y = 0; y < LineHorizont; ++y) {
         for (int x = 0; x < LineVertikal; ++x) {
-            listBoxWindow[y][x] = new TextBox(sf::Vector2f(168, 96), sf::Vector2f(168 * x, 96 * (y+1)),"Helloworld");
+            listBoxWindow[y][x] = new TextBox(sf::Vector2f(168, 96), sf::Vector2f(168 * x, 96 * (y+1)),"empty");
         }
     }
 
-
+    
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)){

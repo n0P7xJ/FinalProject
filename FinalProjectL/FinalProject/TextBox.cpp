@@ -1,7 +1,7 @@
 #include "TextBox.h"
 
 //Text Default Value
- const unsigned int TextBox::defaultCharacterSize = 36;
+ const unsigned int TextBox::defaultCharacterSize = 18;
  const sf::Color TextBox::defaultFillColorText = sf::Color::Black;
  const sf::Font TextBox::defaultFontText = [] {
     sf::Font font;
@@ -27,8 +27,8 @@ void TextBox::setRectangleProperties(const sf::Vector2f& size, const sf::Vector2
     sf::RectangleShape::setPosition(position);
     sf::RectangleShape::setFillColor(fillColor);
     // Настройка коліру вздовш ліній прямокутника
-    /*sf::RectangleShape::setOutlineColor(sf::Color::Black);
-    sf::RectangleShape::setOutlineThickness(2.0f);*/
+    sf::RectangleShape::setOutlineColor(sf::Color::Black);
+    sf::RectangleShape::setOutlineThickness(2.0f);
 }
 
 void TextBox::setTextProperties(const std::string& content, const sf::Font& font, const sf::Color& fillColor,const unsigned int& characterSize) {
@@ -38,9 +38,9 @@ void TextBox::setTextProperties(const std::string& content, const sf::Font& font
     sf::Text::setCharacterSize(characterSize);
 
     // Центруємо текст у прямокутнику
-    sf::FloatRect textBounds = sf::RectangleShape::getLocalBounds();
-    sf::RectangleShape::setOrigin(textBounds.left + textBounds.width / 2.0f, textBounds.top + textBounds.height / 2.0f);
-    sf::RectangleShape::setPosition(sf::RectangleShape::getPosition().x + sf::RectangleShape::getSize().x / 2.0f, sf::RectangleShape::getPosition().y + sf::RectangleShape::getSize().y / 2.0f);
+    sf::FloatRect textBounds = sf::Text::getLocalBounds();
+    sf::Text::setOrigin(textBounds.left + textBounds.width / 2.0f, textBounds.top + textBounds.height / 2.0f);
+    sf::Text::setPosition(sf::RectangleShape::getPosition().x + sf::RectangleShape::getSize().x / 2.0f, sf::RectangleShape::getPosition().y + sf::RectangleShape::getSize().y / 2.0f);
 }
 
 void TextBox::draw(sf::RenderTarget& target, sf::RenderStates states) const{
