@@ -1,12 +1,33 @@
-﻿D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003: The specified task executable "CL.exe" could not be run. System.IO.IOException: There is not enough space on the disk.
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003: 
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.FileStream.WriteCore(Byte[] buffer, Int32 offset, Int32 count)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.FileStream.FlushWrite(Boolean calledFromFinalizer)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.FileStream.Dispose(Boolean disposing)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.Stream.Close()
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.StreamWriter.Dispose(Boolean disposing)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.TextWriter.Dispose()
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at Microsoft.Build.Utilities.CanonicalTrackedInputFiles.SaveTlog(DependencyFilter includeInTLog)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at Microsoft.Build.CPPTasks.CL.ComputeOutOfDateSources()
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at Microsoft.Build.Utilities.ToolTask.Execute()
+﻿  FinalProject.cpp
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\TextBox.h(6,28): warning C4584: TextBox: базовый класс "sf::Drawable" уже является базовым классом для "sf::RectangleShape"
+  (компиляция исходного файла "FinalProject.cpp")
+  C:\Program Files\FinalProject\SFML-2.6.1\include\SFML\Graphics\RenderTarget.hpp(45,7):
+   см. объявление "sf::Drawable"
+  C:\Program Files\FinalProject\SFML-2.6.1\include\SFML\Graphics\RectangleShape.hpp(41,25):
+   см. объявление "sf::RectangleShape"
+  
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\FinalProject.cpp(29,95): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\FinalProject.cpp(29,95): warning C4244:         with
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\FinalProject.cpp(29,95): warning C4244:         [
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\FinalProject.cpp(29,95): warning C4244:             T=float
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\FinalProject.cpp(29,95): warning C4244:         ]
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\FinalProject.cpp(29,87): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\FinalProject.cpp(29,87): warning C4244:         with
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\FinalProject.cpp(29,87): warning C4244:         [
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\FinalProject.cpp(29,87): warning C4244:             T=float
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\FinalProject.cpp(29,87): warning C4244:         ]
+  SystemTime.cpp
+  TextBox.cpp
+C:\Program Files\FinalProject\FinalProjectL\FinalProject\TextBox.h(6,28): warning C4584: TextBox: базовый класс "sf::Drawable" уже является базовым классом для "sf::RectangleShape"
+  (компиляция исходного файла "TextBox.cpp")
+  C:\Program Files\FinalProject\SFML-2.6.1\include\SFML\Graphics\RenderTarget.hpp(45,7):
+   см. объявление "sf::Drawable"
+  C:\Program Files\FinalProject\SFML-2.6.1\include\SFML\Graphics\RectangleShape.hpp(41,25):
+   см. объявление "sf::RectangleShape"
+  
+  Создание кода
+  177 of 178 functions (99.4%) were compiled, the rest were copied from previous compilation.
+    173 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Создание кода завершено
+  FinalProject.vcxproj -> C:\Program Files\FinalProject\FinalProjectL\x64\Release\FinalProject.exe
