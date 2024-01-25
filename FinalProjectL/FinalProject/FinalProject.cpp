@@ -1,11 +1,22 @@
 ﻿#include <SFML/Graphics.hpp>
 
 #include <vector>
+#include <Windows.h>
+#include <iostream>
 
 #include "TextBox.h"
+#include "Days.h"
+
+
+using namespace std;
 
 int main(){
+
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
     sf::RenderWindow window(sf::VideoMode(1176, 768), "DailyTask");
+
 
     // Створюю двухвимірний масив кнопок, для подальшого виводу на екран
     const int LineHorizont = 7;
@@ -24,11 +35,18 @@ int main(){
     //rectangleYearAndMouth.setFillColor(sf::Color::Black);
 
 
+
+
     for (int y = 0; y < LineHorizont; ++y) {
         for (int x = 0; x < LineVertikal; ++x) {
             listBoxWindow[y][x] = new TextBox(sf::Vector2f(168, 96), sf::Vector2f(168 * x, 96 * (y+1)),"empty");
         }
     }
+
+    //створюю об'єкт класу Days
+    Days days(sf::Vector2f(1176, 96), sf::Vector2f(0, 0), "empty", sf::Color::White, TextBox::defaultFontText, sf::Color::Black, TextBox::defaultCharacterSize);
+    days.setMonthAndYear("January", 2024);  // встановлюю місяць і рік
+    days.setDaysOfMonth();
 
     
     while (window.isOpen()) {
@@ -38,13 +56,19 @@ int main(){
                 window.close();
         }
 
-        window.clear(sf::Color::Black);
+        window.clear();
+
+  
+
         MainBox.draw(window);
         for (int i = 0; i < LineHorizont; ++i) {
             for (int j = 0; j < LineVertikal; ++j) {
                 listBoxWindow[i][j]->draw(window);
             }
         }
+
+        days.draw(window);
+
         window.display();
     }
     

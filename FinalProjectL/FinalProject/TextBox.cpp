@@ -28,7 +28,7 @@ void TextBox::setRectangleProperties(const sf::Vector2f& size, const sf::Vector2
     sf::RectangleShape::setFillColor(fillColor);
     // Настройка коліру вздовш ліній прямокутника
     sf::RectangleShape::setOutlineColor(sf::Color::Black);
-    sf::RectangleShape::setOutlineThickness(2.0f);
+    sf::RectangleShape::setOutlineThickness(1.0f);
 }
 
 void TextBox::setTextProperties(const std::string& content, const sf::Font& font, const sf::Color& fillColor,const unsigned int& characterSize) {

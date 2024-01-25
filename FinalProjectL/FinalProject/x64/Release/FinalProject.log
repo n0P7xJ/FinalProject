@@ -1,12 +1,25 @@
-﻿D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003: The specified task executable "CL.exe" could not be run. System.IO.IOException: There is not enough space on the disk.
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003: 
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.FileStream.WriteCore(Byte[] buffer, Int32 offset, Int32 count)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.FileStream.FlushWrite(Boolean calledFromFinalizer)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.FileStream.Dispose(Boolean disposing)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.Stream.Close()
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.StreamWriter.Dispose(Boolean disposing)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at System.IO.TextWriter.Dispose()
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at Microsoft.Build.Utilities.CanonicalTrackedInputFiles.SaveTlog(DependencyFilter includeInTLog)
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at Microsoft.Build.CPPTasks.CL.ComputeOutOfDateSources()
-D:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(703,5): error MSB6003:    at Microsoft.Build.Utilities.ToolTask.Execute()
+﻿  Days.cpp
+C:\Users\Admin\source\repos\n0P7xJ\FinalProject\FinalProjectL\FinalProject\TextBox.h(6,28): warning C4584: 'TextBox': base-class 'sf::Drawable' is already a base-class of 'sf::RectangleShape'
+C:\Program Files\FinalProject\SFML-2.6.1\include\SFML\Graphics\RenderTarget.hpp(45,7): message : see declaration of 'sf::Drawable'
+C:\Program Files\FinalProject\SFML-2.6.1\include\SFML\Graphics\RectangleShape.hpp(41,25): message : see declaration of 'sf::RectangleShape'
+C:\Users\Admin\source\repos\n0P7xJ\FinalProject\FinalProjectL\FinalProject\Days.cpp(14,83): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Admin\source\repos\n0P7xJ\FinalProject\FinalProjectL\FinalProject\Days.cpp(18,95): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Admin\source\repos\n0P7xJ\FinalProject\FinalProjectL\FinalProject\Days.cpp(18,87): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Generating code
+  0 of 249 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  FinalProject.vcxproj -> C:\Users\Admin\source\repos\n0P7xJ\FinalProject\FinalProjectL\x64\Release\FinalProject.exe

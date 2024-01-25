@@ -135,11 +135,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Days.cpp" />
     <ClCompile Include="FinalProject.cpp" />
     <ClCompile Include="SystemTime.cpp" />
     <ClCompile Include="TextBox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Days.h" />
     <ClInclude Include="SystemTime.h" />
     <ClInclude Include="TextBox.h" />
   </ItemGroup>

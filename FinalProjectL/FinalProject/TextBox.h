@@ -5,7 +5,7 @@
 
 class TextBox : public sf::RectangleShape, public sf::Text, public sf::Drawable {
 public:
-    TextBox(const sf::Vector2f& size, const sf::Vector2f& position, const std::string& content = defaultString, const sf::Color& fillColorBox = defaultFillColorBox, const sf::Font& font = defaultFontText, const sf::Color& fillColor = defaultFillColorText, unsigned int characterSize = defaultCharacterSize);
+    TextBox(const sf::Vector2f& size, const sf::Vector2f& position,const std::string& content = defaultString, const sf::Color& fillColorBox = defaultFillColorBox, const sf::Font& font = defaultFontText, const sf::Color& fillColor = defaultFillColorText, unsigned int characterSize = defaultCharacterSize);
 
     // Метод для задання властивостей прямокутника
     void setRectangleProperties(const sf::Vector2f& size, const sf::Vector2f& position, const sf::Color fillColor = defaultFillColorBox);
@@ -15,8 +15,10 @@ public:
 
     //Draw
 
+
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default) const;
-private:
+
+
     // Text default value
     static const unsigned int defaultCharacterSize;
     static const sf::Color defaultFillColorText;
@@ -27,4 +29,6 @@ private:
     static const sf::Vector2f defaultSize;
     // Other
     static const sf::Vector2f defaultPosition;
+
+
 };
