@@ -15,17 +15,17 @@ int main(){
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
-    sf::RenderWindow window(sf::VideoMode(1176, 768), "DailyTask");
+    sf::RenderWindow window(sf::VideoMode(1176, 770), "DailyTask");
 
 
     // Створюю двухвимірний масив кнопок, для подальшого виводу на екран
-    const int LineHorizont = 7;
+    const int LineHorizont = 6;
     const int LineVertikal = 7;
     std::vector<std::vector<TextBox*>> listBoxWindow(LineHorizont,std::vector<TextBox*>(LineVertikal));
     
     // Тимчасовий варіант заповнення
 
-    TextBox MainBox(sf::Vector2f(1176, 96), sf::Vector2f(0, 0));
+    TextBox MainBox(sf::Vector2f(1176, 110), sf::Vector2f(0, 0));
     //MainBox.sf::RectangleShape::setFillColor(sf::Color::Black);
 
     //sf::RectangleShape rectangleYearAndMouth;
@@ -39,12 +39,12 @@ int main(){
 
     for (int y = 0; y < LineHorizont; ++y) {
         for (int x = 0; x < LineVertikal; ++x) {
-            listBoxWindow[y][x] = new TextBox(sf::Vector2f(168, 96), sf::Vector2f(168 * x, 96 * (y+1)),"empty");
+            listBoxWindow[y][x] = new TextBox(sf::Vector2f(168, 110), sf::Vector2f(168 * x, 110 * (y+1)),"empty");
         }
     }
 
     //створюю об'єкт класу Days
-    Days days(sf::Vector2f(1176, 96), sf::Vector2f(0, 0), "empty", sf::Color::White, TextBox::defaultFontText, sf::Color::Black, TextBox::defaultCharacterSize);
+    Days days(sf::Vector2f(1176, 110), sf::Vector2f(0, 0), "empty", sf::Color::White, TextBox::defaultFontText, sf::Color::Black, TextBox::defaultCharacterSize);
     days.setMonthAndYear("January", 2024);  // встановлюю місяць і рік
     days.setDaysOfMonth();
 

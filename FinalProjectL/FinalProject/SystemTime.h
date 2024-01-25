@@ -3,22 +3,30 @@
 #include <iostream>
 #include <Windows.h>
 
-class SystemTime
+class SystemTime : public SYSTEMTIME
 {
-	int hour, minute, second;
-	int day, month, year;
 	SYSTEMTIME sTIME;
 public:
-	int GetHour() const { return hour; }
-	int GetMinute() const { return minute; }
-	int GetSecond() const { return second; }
+	int getDay() const;
+	int getMonth() const;	//	три гетера для отримання дня, місяця, року
+	int getYear() const;
 
-	int GetDay() const { return day; }
-	int GetMonth() const { return month; }
-	int GetYear() const { return year; }
+	SystemTime() {
+		GetSystemTime(reinterpret_cast<SYSTEMTIME*>(this)); //конструктор отримання цьогошеього дня по системного часу
+	}
 
-	SystemTime() : hour(sTIME.wHour), minute(sTIME.wMinute), second(sTIME.wSecond),
-		day(sTIME.wDay), month(sTIME.wMonth), year(sTIME.wYear) {}
+	int getMonthDays() const {
+		SYSTEMTIME lastDayOfMonth = *this;
+		lastDayOfMonth.wDay = SYSTEMTIME::wDay;
+		lastDayOfMonth.wHour = lastDayOfMonth.wMinute = lastDayOfMonth.wSecond = lastDayOfMonth.wMilliseconds = 0;
 
-	void Output();
+		FILETIME ft;
+		SystemTimeToFileTime(&lastDayOfMonth, &ft);
+		FileTimeToSystemTime(&ft, &lastDayOfMonth);
+
+		return lastDayOfMonth.wDay;
+	} 
+	// НЕДОРОБЛЕНИЙ БЕТА ТЕСТ ОТРИМАННЯ ОСТАНЬОГО ДНЯ З МІСЯЦЯ
+
+	void OutputCLOCK(); //функція для виводу часу та дати (тіло в .срр файлі)
 };

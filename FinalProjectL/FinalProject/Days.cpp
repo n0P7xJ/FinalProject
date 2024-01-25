@@ -5,17 +5,17 @@ const string Days::daysOfWeek[] = { "Monday", "Tuesday", "Wednesday", "Thursday"
 Days::Days(const sf::Vector2f& size, const sf::Vector2f& position, const string& content, const sf::Color& fillColorBox, const sf::Font& font, const sf::Color& fillColor, unsigned int characterSize)
     : mainBox(size, position, content, fillColorBox, font, fillColor, characterSize) {
 
-    const int LineHorizont = 7;
+    const int LineHorizont = 6;
     const int LineVertikal = 7;
 
     listBoxWindow.resize(LineHorizont, vector<TextBox*>(LineVertikal));
 
     for (int x = 0; x < LineVertikal; ++x) {
-        listBoxWindow[0][x] = new TextBox(sf::Vector2f(168, 96), sf::Vector2f(168 * x, 96), daysOfWeek[x]);
+        listBoxWindow[0][x] = new TextBox(sf::Vector2f(168, 110), sf::Vector2f(168 * x, 110), daysOfWeek[x]);
     }
     for (int y = 1; y < LineHorizont; ++y) {
         for (int x = 0; x < LineVertikal; ++x) {
-            listBoxWindow[y][x] = new TextBox(sf::Vector2f(168, 96), sf::Vector2f(168 * x, 96 * (y + 1)), "empty");
+            listBoxWindow[y][x] = new TextBox(sf::Vector2f(168, 110), sf::Vector2f(168 * x, 110 * (y + 1)), "empty");
         }
     }
 
