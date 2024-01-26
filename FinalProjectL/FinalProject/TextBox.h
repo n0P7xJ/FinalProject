@@ -29,6 +29,4 @@ public:
     static const sf::Vector2f defaultSize;
     // Other
     static const sf::Vector2f defaultPosition;
-
-
 };
