@@ -6,7 +6,7 @@
 
 #include "TextBox.h"
 #include "Days.h"
-
+#include "SideMenu.h"
 
 using namespace std;
 
@@ -59,6 +59,10 @@ int main(){
     days.setMonthAndYear("JANUARY", 2024, 40);  // встановлюю місяць і рік
     days.setDaysOfMonth();
 
+    SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
+
+    //фон для бічного меню
+    menuSide.setBackground("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/gradient.png");
 
 
     while (window.isOpen()) {
@@ -66,10 +70,21 @@ int main(){
         while (window.pollEvent(event)){
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Escape)
+                {
+                    menuSide.Visible();
+                }
+            }
         }
 
+        
+        
         window.clear();
         window.draw(backgroundRect); //фон
+
         MainBox.draw(window);
 
         for (int i = 0; i < LineHorizont; ++i) {
@@ -77,7 +92,10 @@ int main(){
                 listBoxWindow[i][j]->draw(window);
             }
         }
+
         days.draw(window);
+        //меню бічне
+        menuSide.draw(window);
         window.display();
     }
     
