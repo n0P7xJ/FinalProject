@@ -2,10 +2,12 @@
 
 #include <iostream>
 #include <Windows.h>
+//#include "Calendar.h"
 
 class SystemTime : public SYSTEMTIME
 {
 	SYSTEMTIME sTIME;
+	//Calendar calendar;
 public:
 	int getDay() const;
 	int getMonth() const;	//	три гетера для отримання дня, місяця, року
@@ -15,18 +17,11 @@ public:
 		GetSystemTime(reinterpret_cast<SYSTEMTIME*>(this)); //конструктор отримання цьогошеього дня по системного часу
 	}
 
-	int getMonthDays() const {
-		SYSTEMTIME lastDayOfMonth = *this;
-		lastDayOfMonth.wDay = SYSTEMTIME::wDay;
-		lastDayOfMonth.wHour = lastDayOfMonth.wMinute = lastDayOfMonth.wSecond = lastDayOfMonth.wMilliseconds = 0;
-
-		FILETIME ft;
-		SystemTimeToFileTime(&lastDayOfMonth, &ft);
-		FileTimeToSystemTime(&ft, &lastDayOfMonth);
-
-		return lastDayOfMonth.wDay;
-	} 
-	// НЕДОРОБЛЕНИЙ БЕТА ТЕСТ ОТРИМАННЯ ОСТАНЬОГО ДНЯ З МІСЯЦЯ
+	int getDayOfWeek() const; //метод для отримання неть тижня
+	
+	std::string getMonthName(const int&) const; //метод для отримання ім'я місяця
 
 	void OutputCLOCK(); //функція для виводу часу та дати (тіло в .срр файлі)
 };
+
+int getMonthDay(const SystemTime& sysTime = SystemTime());
