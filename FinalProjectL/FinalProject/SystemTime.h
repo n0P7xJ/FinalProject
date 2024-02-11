@@ -10,18 +10,18 @@ class SystemTime : public SYSTEMTIME
 	//Calendar calendar;
 public:
 	int getDay() const;
-	int getMonth() const;	//	три гетера для отримання дня, місяця, року
+	int getMonth() const;	//	пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ
 	int getYear() const;
 
 	SystemTime() {
-		GetSystemTime(reinterpret_cast<SYSTEMTIME*>(this)); //конструктор отримання цьогошеього дня по системного часу
+		GetSystemTime(reinterpret_cast<SYSTEMTIME*>(this)); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	}
 
-	int getDayOfWeek() const; //метод для отримання неть тижня
+	int getDayOfWeek() const; //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	
-	std::string getMonthName(const int&) const; //метод для отримання ім'я місяця
+	std::string getMonthName(const int&) const; //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ'пїЅ пїЅпїЅпїЅпїЅпїЅ
 
-	void OutputCLOCK(); //функція для виводу часу та дати (тіло в .срр файлі)
+	void OutputCLOCK(); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ пїЅ .пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ)
 };
 
 int getMonthDay(const SystemTime& sysTime = SystemTime());

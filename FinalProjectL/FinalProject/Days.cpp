@@ -22,7 +22,7 @@ Days::Days(const sf::Vector2f& size, const sf::Vector2f& position, const string&
         }
     }
 
-    // розміри і положення для mainBox
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ mainBox
     mainBox.setRectangleProperties(size, position, fillColorBox);
 }
 
@@ -36,8 +36,6 @@ void Days::setMonthAndYear(const string& month, int year, int textSize)
 
 void Days::setDaysOfMonth() 
 {
-
-
     for (int x = 0; x < LineVertikal; ++x) 
     {
         listBoxWindow[0][x]->setTextProperties(daysOfWeek[x], TextBox::defaultFontText, TextBox::defaultFillColorText, TextBox::defaultCharacterSize);
@@ -45,22 +43,22 @@ void Days::setDaysOfMonth()
 
     int day = 1;
 
-    for (int i = 0; i < 6; ++i) { // типу 5 тижнів в місяці(31 день)
-        for (int j = 0; j < 7; ++j) { //7 днів в тижні
+    for (int i = 0; i < 6; ++i) { // пїЅпїЅпїЅпїЅ 5 пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ(31 пїЅпїЅпїЅпїЅ)
+        for (int j = 0; j < 7; ++j) { //7 пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
             if (i == 0)
-            {//назви тижнів
+            {//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
                 listBoxWindow[i][j]->setTextProperties(daysOfWeek[j], TextBox::defaultFontText, TextBox::defaultFillColorText, TextBox::defaultCharacterSize);
             }
             else 
             {
-                if (day <= 31) // дні тижня
+                if (day <= 31) // пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                 {
 
                     listBoxWindow[i][j]->setTextProperties(to_string(day), TextBox::defaultFontText, TextBox::defaultFillColorText, TextBox::defaultCharacterSize);
                     day++;
                 }
-                else //якщо вже є 31 день заповнено то дальше новий
+                else //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ 31 пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                 {
                     listBoxWindow[i][j]->setTextProperties("", TextBox::defaultFontText, TextBox::defaultFillColorText, TextBox::defaultCharacterSize);
                 }
@@ -77,12 +75,12 @@ void Days::draw(sf::RenderWindow& window)
     {
         for (int j = 0; j < listBoxWindow[i].size(); ++j) 
         {
-            if (i == 0) { //зміна фону назв тижня
+            if (i == 0) { //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                 if (daysOfWeek[j] == "SUNDAY" || daysOfWeek[j] == "SATURDAY") {
-                    listBoxWindow[i][j]->setRectangleProperties(sf::Vector2f(168, 110), sf::Vector2f(168 * j, 110), sf::Color(183, 35, 34)); // червоний колір для неділя та суботи
+                    listBoxWindow[i][j]->setRectangleProperties(sf::Vector2f(168, 110), sf::Vector2f(168 * j, 110), sf::Color(183, 35, 34)); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                 }
                 else {
-                    listBoxWindow[i][j]->setRectangleProperties(sf::Vector2f(168, 110), sf::Vector2f(168 * j, 110), sf::Color(118, 168, 230)); // стандартний колір для інших днів
+                    listBoxWindow[i][j]->setRectangleProperties(sf::Vector2f(168, 110), sf::Vector2f(168 * j, 110), sf::Color(118, 168, 230)); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
                 }
             }
             listBoxWindow[i][j]->draw(window);
@@ -91,5 +89,5 @@ void Days::draw(sf::RenderWindow& window)
 }
 
 //listBoxWindow.resize(LineHorizont, vector<TextBox*>(LineVertikal)); 
-//розширює двовимірний вектор listBoxWindow до розміру який вказаний і 
-//створює потрібну к-сть рядків та стовпців і заповнює їх об'єктами з TextBox
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ listBoxWindow пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ 
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ-пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ TextBox
