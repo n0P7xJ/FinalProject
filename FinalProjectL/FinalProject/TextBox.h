@@ -13,9 +13,10 @@ public:
     // Метод для задання властивостей тексту
     void setTextProperties(const std::string& content, const sf::Font& font, const sf::Color& fillColor,const unsigned int& characterSize);
 
+    //Провірка на нажаття боксу
+    bool checkPress(const sf::Vector2f& mousePosition) const;
+
     //Draw
-
-
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states = sf::RenderStates::Default) const;
 
 

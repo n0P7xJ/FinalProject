@@ -43,6 +43,14 @@ void TextBox::setTextProperties(const std::string& content, const sf::Font& font
     sf::Text::setPosition(sf::RectangleShape::getPosition().x + sf::RectangleShape::getSize().x / 2.0f, sf::RectangleShape::getPosition().y + sf::RectangleShape::getSize().y / 2.0f);
 }
 
+bool TextBox::checkPress(const sf::Vector2f& mousePosition) const
+{
+    // Отримуємо границі прямокутник
+    sf::FloatRect rectBounds = sf::RectangleShape::getGlobalBounds();
+    // Перевіряємо, чи миша знаходиться в межах прямокутника
+    return rectBounds.contains(mousePosition);
+}
+
 void TextBox::draw(sf::RenderTarget& target, sf::RenderStates states) const{
     // Тут ви маєте викликати методи малювання вашого об'єкта
     target.draw(static_cast<sf::RectangleShape>(*this), states);

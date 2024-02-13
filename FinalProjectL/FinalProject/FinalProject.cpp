@@ -66,12 +66,29 @@ int main(){
         while (window.pollEvent(event)){
             if (event.type == sf::Event::Closed)
                 window.close();
-
             if (event.type == sf::Event::KeyPressed)
             {
                 if (event.key.code == sf::Keyboard::Escape)
                 {
                     menuSide.Visible();
+                }
+            }
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    // Отримуємо позицію миші
+                    sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+                    // Перевіряємо, чи натиснуто на прямокутник
+                    bool search = true;
+                    for (std::vector<TextBox*> listBox : listBoxWindow) {
+                        if (search) {
+                            for (TextBox* box : listBox) {
+                                if (box->checkPress(mousePosition)) {
+                                    std::cout << "Rectangle clicked!" << std::endl;
+                                    search = false;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
