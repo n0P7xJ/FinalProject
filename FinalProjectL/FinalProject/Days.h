@@ -12,7 +12,7 @@ public:
     Days(const sf::Vector2f& size, const sf::Vector2f& position, const string& content, const sf::Color& fillColorBox, const sf::Font& font, const sf::Color& fillColor, unsigned int characterSize);
 
     void setMonthAndYear(const string& month, int year, int textSize);
-    void setDaysOfMonth();
+    void setDaysOfMonth(const int& mouth = 0);
     void draw(sf::RenderWindow& window);
 
 private:

@@ -53,7 +53,7 @@ int main(){
     //створюю об'єкт класу Days
     Days days(sf::Vector2f(sizeWindowX, sizeBoxY), sf::Vector2f(0, 0), "empty", sf::Color::White, TextBox::defaultFontText, sf::Color::Black, TextBox::defaultCharacterSize);
     days.setMonthAndYear(systemTime.getMonthName(systemTime.getMonth()), systemTime.getYear(), 40);  // встановлюю місяць і рік
-    days.setDaysOfMonth();
+    days.setDaysOfMonth(getMonthDay());
 
     SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
 
@@ -78,7 +78,7 @@ int main(){
                     // Отримуємо позицію миші
                     sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
                     // Перевіряємо, чи натиснуто на прямокутник
-                    bool search = true;
+                    bool search = false;
                     for (std::vector<TextBox*> listBox : listBoxWindow) {
                         if (search) {
                             for (TextBox* box : listBox) {
@@ -87,6 +87,9 @@ int main(){
                                     search = false;
                                 }
                             }
+                        }
+                        else {
+                            search = true;
                         }
                     }
                 }

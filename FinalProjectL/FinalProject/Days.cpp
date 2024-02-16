@@ -34,13 +34,13 @@ void Days::setMonthAndYear(const string& month, int year, int textSize)
 }
 
 
-void Days::setDaysOfMonth() 
+void Days::setDaysOfMonth(const int& mouth) 
 {
     for (int x = 0; x < LineVertikal; ++x) 
     {
         listBoxWindow[0][x]->setTextProperties(daysOfWeek[x], TextBox::defaultFontText, TextBox::defaultFillColorText, TextBox::defaultCharacterSize);
     }
-
+    
     int day = 1;
 
     for (int i = 0; i < 6; ++i) { // ���� 5 ����� � �����(31 ����)
@@ -52,11 +52,10 @@ void Days::setDaysOfMonth()
             }
             else 
             {
-                if (day <= 31) // �� �����
+                if (day <= mouth) // �� �����
                 {
-
                     listBoxWindow[i][j]->setTextProperties(to_string(day), TextBox::defaultFontText, TextBox::defaultFillColorText, TextBox::defaultCharacterSize);
-                    day++;
+                    ++day;
                 }
                 else //���� ��� � 31 ���� ��������� �� ������ �����
                 {
