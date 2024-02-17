@@ -1,15 +1,14 @@
 ﻿#include <SFML/Graphics.hpp>
-
 #include <vector>
 #include <Windows.h>
 #include <iostream>
-
 #include "SystemTime.h"
 #include "TextBox.h"
 #include "Days.h"
 #include "SideMenu.h"
 
 using namespace std;
+
 
 SystemTime systemTime;
 
@@ -22,7 +21,9 @@ SystemTime systemTime;
 #define lineHorizont  6
 #define lineVetrikal  7
 
-int main(){
+int main() {
+
+
 
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
@@ -40,13 +41,13 @@ int main(){
     //backgroundRect.setTexture(&BackGround);
     // Створюю двухвимірний масив кнопок, для подальшого виводу на екран
 
-    std::vector<std::vector<TextBox*>> listBoxWindow(lineHorizont,std::vector<TextBox*>(lineVetrikal));
-    
+    std::vector<std::vector<TextBox*>> listBoxWindow(lineHorizont, std::vector<TextBox*>(lineVetrikal));
+
     TextBox MainBox(sf::Vector2f(sizeWindowX, sizeBoxY), sf::Vector2f(0, 0));
 
     for (int y = 0; y < lineHorizont; ++y) {
         for (int x = 0; x < lineVetrikal; ++x) {
-            listBoxWindow[y][x] = new TextBox(sf::Vector2f(sizeBoxX, sizeBoxY), sf::Vector2f(sizeBoxX * x, sizeBoxY * (y+1)),"");
+            listBoxWindow[y][x] = new TextBox(sf::Vector2f(sizeBoxX, sizeBoxY), sf::Vector2f(sizeBoxX * x, sizeBoxY * (y + 1)), "");
         }
     }
 
@@ -56,14 +57,18 @@ int main(){
     days.setDaysOfMonth(getMonthDay());
 
     SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
-
     //фон для бічного меню
     menuSide.setBackground("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/gradient.png");
 
+    //логотип
+    menuSide.setLogoSize(sf::Vector2f(100, 100));
+    menuSide.setLogoPosition(sf::Vector2f(60, 1));
+
+    window.setVerticalSyncEnabled(true);
 
     while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)){
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
             if (event.type == sf::Event::KeyPressed)
@@ -77,6 +82,19 @@ int main(){
                 if (event.mouseButton.button == sf::Mouse::Left) {
                     // Отримуємо позицію миші
                     sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+      
+                    if (menuSide.calendarButton.checkPress(mousePosition)) {
+                        cout << "Calendar button clicked" << endl;
+      
+                    }
+                    else if (menuSide.settingButton.checkPress(mousePosition)) {
+                        cout << "Settings button clicked" << endl;
+                    
+                    }
+                    else if (menuSide.homeButton.checkPress(mousePosition)) {
+                       cout << "Home button clicked" << endl;
+                     
+                    }
                     // Перевіряємо, чи натиснуто на прямокутник
                     bool search = false;
                     for (std::vector<TextBox*> listBox : listBoxWindow) {
@@ -102,7 +120,7 @@ int main(){
         menuSide.draw(window);
         window.display();
     }
-    
+
     for (int i = 0; i < lineHorizont; ++i) {
         for (int j = 0; j < lineVetrikal; ++j) {
             delete listBoxWindow[i][j];
