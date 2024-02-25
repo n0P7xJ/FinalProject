@@ -2,26 +2,28 @@
 
 #include <iostream>
 #include <Windows.h>
-//#include "Calendar.h"
+#include <timezoneapi.h>
+#include <stdexcept>
 
 class SystemTime : public SYSTEMTIME
 {
 	SYSTEMTIME sTIME;
-	//Calendar calendar;
 public:
 	int getDay() const;
-	int getMonth() const;	//	пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ
+	int getMonth() const;	//	три гетера для отримання дня, місяця, року
 	int getYear() const;
 
 	SystemTime() {
-		GetSystemTime(reinterpret_cast<SYSTEMTIME*>(this)); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+		GetSystemTime(reinterpret_cast<SYSTEMTIME*>(this)); //конструктор отримання цьогошеього дня по системного часу
 	}
 
-	int getDayOfWeek() const; //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	int getDayOfWeek() const; //метод для отримання дня тижня
 	
-	std::string getMonthName(const int&) const; //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ'пїЅ пїЅпїЅпїЅпїЅпїЅ
+	std::string getMonthName(const int&) const; //метод для отримання ім'я місяця
 
-	void OutputCLOCK(); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ пїЅ .пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ)
+	int getDayOfWeekForFirstDayOfMonth() const; //метод який повертає місцезнаходження першого дня місяця за календарним порядком
+
+	void OutputCLOCK(); //функція для виводу часу та дати (тіло в .срр файлі)
 };
 
 int getMonthDay(const SystemTime& sysTime = SystemTime());

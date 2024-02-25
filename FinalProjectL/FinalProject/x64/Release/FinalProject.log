@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 ﻿  FinalProject.cpp
 C:\Program Files\FinalProject\FinalProjectL\FinalProject\TextBox.h(7,28): warning C4584: TextBox: базовый класс "sf::Drawable" уже является базовым классом для "sf::RectangleShape"
 C:\Program Files\FinalProject\SFML-2.6.1\include\SFML\Graphics\RenderTarget.hpp(45,7): message : см. объявление "sf::Drawable"
 C:\Program Files\FinalProject\SFML-2.6.1\include\SFML\Graphics\RectangleShape.hpp(41,25): message : см. объявление "sf::RectangleShape"
 C:\Program Files\FinalProject\FinalProjectL\FinalProject\FinalProject.cpp(14,5): error C2365: main: переопределение; предыдущим определением было "перечислитель"
 C:\Program Files\FinalProject\FinalProjectL\FinalProject\settings.h(39,5): message : см. объявление "main"
+=======
+﻿  FinalProject.vcxproj -> C:\Program Files\FinalProject\FinalProjectL\x64\Release\FinalProject.exe
+>>>>>>> cb5810b4d94a9584b81160d13ea8a9de130bcd41
