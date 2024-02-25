@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class Calendar 
+class Calendar
 {
 public:
 
@@ -17,7 +17,7 @@ public:
     void draw(sf::RenderWindow& window);
 
     void setMonthAndYear(const string& month, int year, int textSize); // ���������� ����� � ��
-    void setDaysOfMonth(const int& mouth = 0, const int &startDay = 0); // ���������� �-��� ��� ������ + ������� �����
+    void setDaysOfMonth(const int& mouth = 0, const int& startDay = 0); // ���������� �-��� ��� ������ + ������� �����
     void setMainBox(TextBox* ptrMainBox); //���������� �������� �� �������� �����������(MainBox)
     void setMouthBoxList(vector<vector<TextBox*>>* ptrMouthBoxList); // ���������� �������� �� ����� ������������
 

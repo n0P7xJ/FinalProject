@@ -27,20 +27,20 @@ static const sf::Font defaultFontText = [] {
         throw std::runtime_error("Failed to load font");
     }
     return font;
-}();
-static const std::string defaultString = "";
-// Rectangle default value
-static const sf::Color defaultFillColorBox = sf::Color::White;
-static const sf::Vector2f defaultSize(1.f, 1.f);
-// Other
-static const sf::Vector2f defaultPosition(0.f, 0.f);
+    }();
+    static const std::string defaultString = "";
+    // Rectangle default value
+    static const sf::Color defaultFillColorBox = sf::Color::White;
+    static const sf::Vector2f defaultSize(1.f, 1.f);
+    // Other
+    static const sf::Vector2f defaultPosition(0.f, 0.f);
 
-enum StatusProgram {
-    main = 0,
-    calendar,
-    menu,
-    task,
-    other
-};
+    enum StatusProgram 
+    {
+        calendar = 0,
+        menu,
+        task,
+        other
+    };
 
-static const SystemTime systemTime;
+    static const SystemTime systemTime;

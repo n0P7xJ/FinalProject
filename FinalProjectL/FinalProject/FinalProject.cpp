@@ -8,8 +8,10 @@
 #include "Calendar.h"
 #include "SideMenu.h"
 #include "settings.h"
+#include "Calendar.h"
 
 using namespace std;
+
 
 int main() {
     SetConsoleCP(1251);
@@ -20,7 +22,13 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(sizeWindowX, sizeWindowY), "DailyTask");
 
     TextBox* mainBox = new TextBox();
-    vector<vector<TextBox>>* listBoxWindow = new vector<vector<TextBox>>(lineHorizont,vector<TextBox>(lineVetrikal));
+    vector<vector<TextBox*>>* listBoxWindow = new vector<vector<TextBox*>>(lineHorizont, vector<TextBox*>(lineVetrikal));
+
+
+    Calendar* mycalendar = new Calendar(mainBox, listBoxWindow);
+    mycalendar->setMonthAndYear("February", 2024, 40);
+    mycalendar->setDaysOfMonth();
+
 
     //створюю об'єкт класу Days #2 масив
     //Days days(sf::Vector2f(sizeWindowX, sizeBoxY), sf::Vector2f(0, 0), "empty", sf::Color::White, TextBox::defaultFontText, sf::Color::Black, TextBox::defaultCharacterSize);
@@ -38,8 +46,10 @@ int main() {
 
             window.clear();
 
+            mycalendar->draw(window);
 
             window.display();
+
         }
         default:
             break;
@@ -48,6 +58,7 @@ int main() {
 
     delete mainBox;
     delete listBoxWindow;
+    delete mycalendar;
 
     //SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
     ////фон для бічного меню
