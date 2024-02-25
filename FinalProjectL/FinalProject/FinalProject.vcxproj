@@ -135,14 +135,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Days.cpp" />
+    <ClCompile Include="Calendar.cpp" />
     <ClCompile Include="FinalProject.cpp" />
+    <ClCompile Include="settings.cpp" />
     <ClCompile Include="SideMenu.cpp" />
     <ClCompile Include="SystemTime.cpp" />
     <ClCompile Include="TextBox.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Days.h" />
+    <ClInclude Include="Calendar.h" />
+    <ClInclude Include="settings.h" />
     <ClInclude Include="SideMenu.h" />
     <ClInclude Include="SystemTime.h" />
     <ClInclude Include="TextBox.h" />

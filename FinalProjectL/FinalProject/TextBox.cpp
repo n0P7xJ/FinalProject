@@ -1,22 +1,5 @@
 #include "TextBox.h"
 
-//Text Default Value
- const unsigned int TextBox::defaultCharacterSize = 20;
- const sf::Color TextBox::defaultFillColorText = sf::Color::Black;
- const sf::Font TextBox::defaultFontText = [] {
-    sf::Font font;
-    if (!font.loadFromFile("Font/Oswald.ttf")) {
-        throw std::runtime_error("Failed to load font");
-    }
-    return font;
-}();
- const std::string TextBox::defaultString = "";
-//Rectangle Default Value
- const sf::Color TextBox::defaultFillColorBox = sf::Color::White;
- const sf::Vector2f TextBox::defaultSize(1.f,1.f);
-//Other 
- const sf::Vector2f defaultPosition(0.f, 0.f);
-
 TextBox::TextBox(const sf::Vector2f& size, const sf::Vector2f& position, const std::string& content, const sf::Color& fillColorBox, const sf::Font& font, const sf::Color& fillColor, unsigned int characterSize) {
     setRectangleProperties(size, position, fillColorBox);
     setTextProperties(content, font, fillColor, characterSize);
