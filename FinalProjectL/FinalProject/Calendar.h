@@ -20,7 +20,7 @@ public:
     void setDaysOfMonth(const int& mouth = 0, const int& startDay = 0); // ���������� �-��� ��� ������ + ������� �����
     void setMainBox(TextBox* ptrMainBox); //���������� �������� �� �������� �����������(MainBox)
     void setMouthBoxList(vector<vector<TextBox*>>* ptrMouthBoxList); // ���������� �������� �� ����� ������������
-
+    void isBoxPressed(const sf::Vector2f& mousePosition) const;
 protected:
     void adjustMouthBoxList(); //��������� ��������� ������������
     void adjustMainBox(); //��������� ��������� ��������� ������������

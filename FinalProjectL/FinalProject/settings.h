@@ -40,6 +40,7 @@ static const sf::Font defaultFontText = [] {
         calendar = 0,
         menu,
         task,
+        setting,
         other
     };
 

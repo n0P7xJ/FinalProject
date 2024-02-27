@@ -12,7 +12,6 @@
 
 using namespace std;
 
-
 int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
@@ -24,11 +23,18 @@ int main() {
     TextBox* mainBox = new TextBox();
     vector<vector<TextBox*>>* listBoxWindow = new vector<vector<TextBox*>>(lineHorizont, vector<TextBox*>(lineVetrikal));
 
-
     Calendar* mycalendar = new Calendar(mainBox, listBoxWindow);
-    mycalendar->setMonthAndYear("February", 2024, 40);
-    mycalendar->setDaysOfMonth();
+    mycalendar->setMonthAndYear(systemTime.getMonthName(systemTime.getMonth()), systemTime.getYear(), 40);
+    mycalendar->setDaysOfMonth(getMonthDay(systemTime), systemTime.getDayOfWeekForFirstDayOfMonth());
 
+    SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
+    //фон для бічного меню
+    menuSide.setBackground("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/gradient.png");
+    //логотип калібровка
+    menuSide.setLogoSize(sf::Vector2f(100, 100));
+    menuSide.setLogoPosition(sf::Vector2f(60, 1));
+
+    window.setVerticalSyncEnabled(true);
 
     //створюю об'єкт класу Days #2 масив
     //Days days(sf::Vector2f(sizeWindowX, sizeBoxY), sf::Vector2f(0, 0), "empty", sf::Color::White, TextBox::defaultFontText, sf::Color::Black, TextBox::defaultCharacterSize);
@@ -39,26 +45,56 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Escape)
+                {
+                    std::cout << "Click escape\n";
+                    if (menuSide.Visible()) {
+                        statusProgram = calendar;
+                    }
+                    else {
+                        statusProgram = menu;
+                    }
+                }
+            }
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    /*Отримуємо позицію миші*/
+                    sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+
+                    statusProgram = menuSide.isButtonClicked(mousePosition);
+                    mycalendar->isBoxPressed(mousePosition);
+                }
+            }
         }
         switch (statusProgram) {
         case calendar: {
-
-
-            window.clear();
-
+            window.clear(sf::Color::Black);
             mycalendar->draw(window);
-
             window.display();
-
+            break;
+        }
+        case menu: {
+            window.clear(sf::Color::Black);
+            mycalendar->draw(window);
+            menuSide.draw(window);
+            window.display();
+            break;
+        }
+        case setting: {
+            window.clear(sf::Color::White);
+            menuSide.draw(window);
+            window.display();
+            break;
         }
         default:
             break;
         }
     }
-
     delete mainBox;
     delete listBoxWindow;
-    delete mycalendar;
+//   delete mycalendar;
 
     //SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
     ////фон для бічного меню

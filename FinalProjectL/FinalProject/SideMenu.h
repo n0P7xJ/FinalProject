@@ -18,9 +18,10 @@ public:
 	void setLogoSize(const sf::Vector2f& size);
 	void setLogoPosition(const sf::Vector2f& position);
 
-	bool isButtonClicked(const sf::Vector2f& mousePosition) const;
-	void Visible();
-	bool isVisible;  //��� ���� ��� ���� ������� �� ������ �� ����������� ��� ������� �����������(true/false)
+	/*bool isButtonClicked(const sf::Vector2f& mousePosition) const;*/
+	bool Visible();  //��� ���� ��� ���� ������� �� ������ �� ����������� ��� ������� �����������(true/false)
+
+	StatusProgram isButtonClicked(const sf::Vector2f& mousePosition) const;
 
 protected:
 	TextBox homeButton;
@@ -31,6 +32,7 @@ private:
 	sf::Texture backgroundTexture;
 	sf::Texture logoTexture;
 	sf::Sprite logo;
+	bool isVisible;
 };
 
 

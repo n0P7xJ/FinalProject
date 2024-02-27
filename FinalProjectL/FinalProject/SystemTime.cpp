@@ -22,18 +22,18 @@ int SystemTime::getDayOfWeek() const
 
 std::string SystemTime::getMonthName(const int& monthNumber) const
 {   
-	//перевірка на коректність номера місяця
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	if (monthNumber < 1 || monthNumber > 12)
 		throw (std::runtime_error("Invalid month number"));
 
-	//константний масив місяців
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 	const char* monthNames[] = {
 			"January", "February", "March", "April",
 			"May", "June", "July", "August",
 			"September", "October", "November", "December"
 	};
 
-	//повернення назви місяця за його номером (від 1 до 12)
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅ 1 пїЅпїЅ 12)
 	return monthNames[monthNumber - 1];
 }
 
@@ -41,10 +41,10 @@ void SystemTime::OutputCLOCK()
 {
 	while (true)
 	{
-		GetLocalTime(&sTIME); //отримуємо локальний час
+		GetLocalTime(&sTIME); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
 
 		std::cout << "\t" << sTIME.wHour << ":" << sTIME.wMinute << ":" << sTIME.wSecond
-			<< std::endl << "\t" << sTIME.wDay << "." << sTIME.wMonth << "." << sTIME.wYear; //виводимо цкй час та дату
+			<< std::endl << "\t" << sTIME.wDay << "." << sTIME.wMonth << "." << sTIME.wYear; //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
 
 		Sleep(1000);
 
@@ -57,10 +57,10 @@ int getMonthDay(const SystemTime& sysTime)
 	int month = sysTime.getMonth();
 	int year = sysTime.getYear();
 
-	//Перевірка на високосний рік
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 	bool isLeapYear = ((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0);
 
-	//Масив, що містить кількість днів у місяці
+	//пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
 	int daysInMonth[] = { 0, 31, (isLeapYear ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 	return daysInMonth[month];
@@ -69,16 +69,16 @@ int getMonthDay(const SystemTime& sysTime)
 int SystemTime::getDayOfWeekForFirstDayOfMonth() const {
 	SYSTEMTIME firstDayOfMonth = *this;
 
-	// Встановлюємо перше число місяця
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	firstDayOfMonth.wDay = 1;
 
-	// Отримуємо день тижня для першого числа місяця
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 	FILETIME ft;
 	SystemTimeToFileTime(&firstDayOfMonth, &ft);
 
 	TIME_ZONE_INFORMATION timeZoneInfo;
 	if (!FileTimeToSystemTime(&ft, &firstDayOfMonth)) {
-		// Обробка помилки конвертації часу
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 		throw std::runtime_error("Failed to convert system time to local time");
 	}
 

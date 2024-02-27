@@ -1,6 +1,6 @@
 #include "Calendar.h"
 
-const string Calendar::daysOfWeek[] = { "SUNDAY", "MONDAY", "TUESDAY", "WEDENESDAY", "THURSDAY", "FRIDAY", "SATURDAY" };
+const string Calendar::daysOfWeek[] = { "MONDAY", "TUESDAY", "WEDENESDAY", "THURSDAY", "FRIDAY", "SATURDAY","SUNDAY", };
 
 Calendar::Calendar(TextBox* ptrMainBox, vector<vector<TextBox*>>* ptrMouthBoxList)
 {
@@ -25,39 +25,35 @@ void Calendar::setMonthAndYear(const string& month, int year, int textSize) {
     mainBox->setTextProperties(month + " " + to_string(year), defaultFontText, defaultFillColorText, textSize);
 }
 
-
-void Calendar::setDaysOfMonth(const int& mouth, const int& startDay)
-{
-    for (int x = 0; x < lineVetrikal; ++x)
-    {
-        (*listBoxWindow)[0][x]->setTextProperties(daysOfWeek[x], defaultFontText, defaultFillColorText, defaultCharacterSize);
-    }
-
+// Заповнення днів місяця
+void Calendar::setDaysOfMonth(const int& month, const int& startDay) {
     int day = 1;
 
-    for (int i = 0; i < 6; ++i) { // ���� 5 ����� � �����(31 ����)
-        for (int j = 0; j < 7; ++j) { //7 ��� � ����
-            if (i == 0)
-            {//����� �����
+    // Заповнення першого рядка масиву назвами днів тижня
+    for (int i = 0; i < 7; ++i) {
+        (*listBoxWindow)[0][i]->setTextProperties(daysOfWeek[i], defaultFontText, defaultFillColorText, defaultCharacterSize);
+    }
 
-                (*listBoxWindow)[i][j]->setTextProperties(daysOfWeek[j], defaultFontText, defaultFillColorText, defaultCharacterSize);
-            }
-            else
-            {
-                if (day <= 31) // �� �����
-                {
-
-                    (*listBoxWindow)[i][j]->setTextProperties(to_string(day), defaultFontText, defaultFillColorText, defaultCharacterSize);
-                    day++;
-                }
-                else //���� ��� � 31 ���� ��������� �� ������ �����
-                {
+    // Заповнення днів місяця
+    for (int i = 1; i < 6; ++i) { // 6 рядків у календарі
+        for (int j = 0; j < 7; ++j) { // 7 днів у тижні
+            if (day <= month) { // Перевіряємо, чи ще не закінчились дні місяця
+                if (i == 1 && j < startDay - 1) { // Якщо це перший рядок і позиція є до початкового дня місяця
                     (*listBoxWindow)[i][j]->setTextProperties("", defaultFontText, defaultFillColorText, defaultCharacterSize);
                 }
+                else {
+                    (*listBoxWindow)[i][j]->setTextProperties(to_string(day), defaultFontText, defaultFillColorText, defaultCharacterSize);
+                    ++day;
+                }
+            }
+            else {
+                (*listBoxWindow)[i][j]->setTextProperties("", defaultFontText, defaultFillColorText, defaultCharacterSize); // Залишаємо решту клітинок порожніми
             }
         }
     }
 }
+
+
 
 void Calendar::setMainBox(TextBox* ptrMainBox)
 {
@@ -77,6 +73,17 @@ void Calendar::setMouthBoxList(vector<vector<TextBox*>>* ptrMouthBoxList)
     }
     else
         throw(std::runtime_error("PtrMouthBoxList its nullptr"));
+}
+
+void Calendar::isBoxPressed(const sf::Vector2f& mousePosition) const{
+    for (vector<TextBox*> list : (*listBoxWindow)) {
+        for (TextBox* itList : list) {
+            if (itList->checkPress(mousePosition)) {
+                std::cout << "Press box " + std::string(itList->getString()) + '\n';
+                return;
+            }
+        }
+    }
 }
 
 void Calendar::adjustMouthBoxList() //������������

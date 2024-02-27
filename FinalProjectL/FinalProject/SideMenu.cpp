@@ -15,15 +15,30 @@ homeButton(sf::Vector2f(180, 50), sf::Vector2f(10, 110), "Main"){
 
 }
 
-bool SideMenu::isButtonClicked(const sf::Vector2f& mousePosition) const {
-    return  homeButton.checkPress(mousePosition) ||
-        calendarButton.checkPress(mousePosition) ||
-        settingButton.checkPress(mousePosition);
+//bool SideMenu::isButtonClicked(const sf::Vector2f& mousePosition) const {
+//    return  homeButton.checkPress(mousePosition) ||
+//        calendarButton.checkPress(mousePosition) ||
+//        settingButton.checkPress(mousePosition);
+//}
+
+bool SideMenu::Visible() {
+    isVisible = !isVisible;
+    return !isVisible;
 }
 
-void SideMenu::Visible() 
-{
-    isVisible = !isVisible;
+StatusProgram SideMenu::isButtonClicked(const sf::Vector2f& mousePosition) const{
+    if (homeButton.checkPress(mousePosition)) {
+        return menu;
+    }
+    else if(calendarButton.checkPress(mousePosition)) {
+        return calendar;
+    }
+    else if (settingButton.checkPress(mousePosition)) {
+        return setting;
+    }
+    else {
+        return other;
+    }
 }
 
 void SideMenu::draw(sf::RenderWindow& sideWindow) {
