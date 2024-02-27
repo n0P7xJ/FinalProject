@@ -1,1 +1,4 @@
-﻿LINK : fatal error LNK1104: не удается открыть файл "C:\Program Files\FinalProject\FinalProjectL\x64\Release\FinalProject.exe"
+﻿  SystemTime.cpp
+  TextBox.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(1127,5): error MSB6006: "link.exe" завершилась с кодом 1181.
+LINK : fatal error LNK1181: не удается открыть входной файл "sfml-network-2.lib"
