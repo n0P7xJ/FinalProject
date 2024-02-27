@@ -1,56 +1,164 @@
-﻿
-#include <SFML/Graphics.hpp>
-
+﻿#include <SFML/Graphics.hpp>
+#include <vector>
+#include <Windows.h>
 #include <iostream>
-#include <exception>
 
-#include "UsersClass/TextBox.h"
+#include "SystemTime.h"
+#include "TextBox.h"
+#include "Calendar.h"
+#include "SideMenu.h"
+#include "settings.h"
+#include "Calendar.h"
 
-int main(){
-    try {
-        sf::RenderWindow window(sf::VideoMode(1170, 768), "DailyTask");
+using namespace std;
 
-        // Створюю двухвимірний масив кнопок, для подальшого виводу на екран
-        const int LineHorizont = 7;
-        const int LineVertikal = 7;
-        sf::RectangleShape listRectangl[LineHorizont][LineVertikal]; // Статичний оскільки масив не буде міняти свої розміри
-        // sf::RectangleShape (*ptrListRectangle)[LineVertikal] = listRectangl; Вказівник на масив якщо буде потрібен нараз в коментарі
-        // Структура вказівника (вказівник на масив)[розмір масива], не створив динамічний оскільки розмір не буде мінятися
+int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
 
-        // Тимчасовий варіант заповнення
+    StatusProgram statusProgram = calendar;
 
-        sf::RectangleShape rectangleYearAndMouth;
-        // sf::RectangleShape* rectangleYearAndMourh;
-        rectangleYearAndMouth.setSize(sf::Vector2f(1170, 96));
-        rectangleYearAndMouth.setPosition(sf::Vector2f(0, 0));
-        rectangleYearAndMouth.setFillColor(sf::Color::Black);
+    sf::RenderWindow window(sf::VideoMode(sizeWindowX, sizeWindowY), "DailyTask");
 
-        /*for (int i = 0; i < LineHorizont; ++i) {
-            for (int j = 0; j < LineVertikal; ++j) {
-                TextBox box(sf::Vector2f(static_cast <float>(143), static_cast <float>(109)), sf::Vector2f(static_cast <float>(143 * i), static_cast<float> (109 * j)), "1");
-                listRectangl[i][j] = box;
+    TextBox* mainBox = new TextBox();
+    vector<vector<TextBox*>>* listBoxWindow = new vector<vector<TextBox*>>(lineHorizont, vector<TextBox*>(lineVetrikal));
+
+    Calendar* mycalendar = new Calendar(mainBox, listBoxWindow);
+    mycalendar->setMonthAndYear(systemTime.getMonthName(systemTime.getMonth()), systemTime.getYear(), 40);
+    mycalendar->setDaysOfMonth(getMonthDay(systemTime), systemTime.getDayOfWeekForFirstDayOfMonth());
+
+    SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
+    //фон для бічного меню
+    menuSide.setBackground("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/gradient.png");
+    //логотип калібровка
+    menuSide.setLogoSize(sf::Vector2f(100, 100));
+    menuSide.setLogoPosition(sf::Vector2f(60, 1));
+
+    window.setVerticalSyncEnabled(true);
+
+    //створюю об'єкт класу Days #2 масив
+    //Days days(sf::Vector2f(sizeWindowX, sizeBoxY), sf::Vector2f(0, 0), "empty", sf::Color::White, TextBox::defaultFontText, sf::Color::Black, TextBox::defaultCharacterSize);
+    //days.setMonthAndYear(systemTime.getMonthName(systemTime.getMonth()), systemTime.getYear(), 40);  // встановлюю місяць і рік
+    //days.setDaysOfMonth(getMonthDay());
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed)
+                window.close();
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Escape)
+                {
+                    std::cout << "Click escape\n";
+                    if (menuSide.Visible()) {
+                        statusProgram = calendar;
+                    }
+                    else {
+                        statusProgram = menu;
+                    }
+                }
             }
-        }*/
+            if (event.type == sf::Event::MouseButtonPressed) {
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    /*Отримуємо позицію миші*/
+                    sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
-
-        while (window.isOpen()) {
-            sf::Event event;
-            while (window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed)
-                    window.close();
+                    statusProgram = menuSide.isButtonClicked(mousePosition);
+                    mycalendar->isBoxPressed(mousePosition);
+                }
             }
-
-            window.clear(sf::Color::White);
-            window.draw(rectangleYearAndMouth);
-            //window.draw()
-            window.display();
         }
-        return 0;
+        switch (statusProgram) {
+        case calendar: {
+            window.clear(sf::Color::Black);
+            mycalendar->draw(window);
+            window.display();
+            break;
+        }
+        case menu: {
+            window.clear(sf::Color::Black);
+            mycalendar->draw(window);
+            menuSide.draw(window);
+            window.display();
+            break;
+        }
+        case setting: {
+            window.clear(sf::Color::White);
+            menuSide.draw(window);
+            window.display();
+            break;
+        }
+        default:
+            break;
+        }
     }
-    catch (std::exception error) {
-        std::cerr << error.what() << std::endl;
-    }
-    catch (...) {
-        std::cerr << "Error" << std::endl;
-    }
+    delete mainBox;
+    delete listBoxWindow;
+//   delete mycalendar;
+
+    //SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
+    ////фон для бічного меню
+    //menuSide.setBackground("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/gradient.png");
+
+    ////логотип #1 калібровка
+    //menuSide.setLogoSize(sf::Vector2f(100, 100));
+    //menuSide.setLogoPosition(sf::Vector2f(60, 1));
+
+    //window.setVerticalSyncEnabled(true);
+
+    //while (window.isOpen()) {
+    //    sf::Event event;
+    //    while (window.pollEvent(event)) {
+    //        if (event.type == sf::Event::Closed)
+    //            window.close();
+    //        if (event.type == sf::Event::KeyPressed)
+    //        {
+    //            if (event.key.code == sf::Keyboard::Escape)
+    //            {
+    //                menuSide.Visible();
+    //            }
+    //        }
+    //        if (event.type == sf::Event::MouseButtonPressed) {
+    //            if (event.mouseButton.button == sf::Mouse::Left) {
+    //                // Отримуємо позицію миші
+    //                sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+    //  
+    //                if (menuSide.calendarButton.checkPress(mousePosition)) {
+    //                    cout << "Calendar button clicked" << endl;
+    //  
+    //                }
+    //                else if (menuSide.settingButton.checkPress(mousePosition)) {
+    //                    cout << "Settings button clicked" << endl;
+    //                
+    //                }
+    //                else if (menuSide.homeButton.checkPress(mousePosition)) {
+    //                   cout << "Home button clicked" << endl;
+    //                 
+    //                }
+    //                // Перевіряємо, чи натиснуто на прямокутник
+    //                /*bool search = false;
+    //                for (std::vector<TextBox*> listBox : days.getList()) {
+    //                    if (search) {
+    //                        for (TextBox* box : listBox) {
+    //                            if (box->checkPress(mousePosition)) {
+    //                                std::cout << "Rectangle clicked!" << std::endl;
+    //                                search = false;
+    //                            }
+    //                        }
+    //                    }
+    //                    else {
+    //                        search = true;
+    //                    }
+    //                }*/
+    //            }
+    //        }
+    //    }
+    //    window.clear();
+    //    /*days.draw(window);*/
+    //    //меню бічне
+    //    menuSide.draw(window);
+    //    window.display();
+    //}
+
+    return 0;
 }
