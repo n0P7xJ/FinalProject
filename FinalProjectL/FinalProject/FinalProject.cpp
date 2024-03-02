@@ -21,11 +21,11 @@ int main() {
     sf::RenderWindow window(sf::VideoMode(sizeWindowX, sizeWindowY), "DailyTask");
 
     TextBox* mainBox = new TextBox();
-    vector<vector<TextBox*>>* listBoxWindow = new vector<vector<TextBox*>>(lineHorizont, vector<TextBox*>(lineVetrikal));
+    vector<vector<TextBox*>>* listBoxWindow = new vector<vector<TextBox*>>(lineHorizontX, vector<TextBox*>(lineVetrikalY));
 
     Calendar* mycalendar = new Calendar(mainBox, listBoxWindow);
-    mycalendar->setMonthAndYear(systemTime.getMonthName(systemTime.getMonth()), systemTime.getYear(), 40);
-    mycalendar->setDaysOfMonth(getMonthDay(systemTime), systemTime.getDayOfWeekForFirstDayOfMonth());
+    mycalendar->setMonthAndYear(systemTime.getMonthName(3), systemTime.getYear(), 40);
+    mycalendar->setDaysOfMonth(getMonthDay(3, systemTime.getYear()), systemTime.getDayOfWeekForFirstDayOfMonth(3));
 
     SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
     //фон для бічного меню

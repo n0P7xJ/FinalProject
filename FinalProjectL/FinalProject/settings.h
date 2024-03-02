@@ -7,15 +7,16 @@
 
 //Параметри вікна
 #define sizeWindowX 1176
-#define sizeWindowY 770
-
-//Параметри бокса при співідношині 6:7
-#define sizeBoxX 168
-#define sizeBoxY 110
+#define sizeWindowY 872
 
 //Лінії для масива 
-#define lineHorizont  6
-#define lineVetrikal  7
+#define lineHorizontX  7
+#define lineVetrikalY  7
+
+//Параметри бокса при співідношині 7:7
+#define sizeBoxX sizeWindowX/lineHorizontX
+#define sizeBoxMainY sizeWindowY/8  // 111
+#define sizeBoxY (sizeWindowY-sizeBoxMainY)/lineVetrikalY
 
 //TextBox
 // Text default value
