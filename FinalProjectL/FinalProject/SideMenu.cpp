@@ -3,7 +3,7 @@
 
 SideMenu::SideMenu(const sf::Vector2f& size, const sf::Vector2f& position) : TextBox(size, position), isVisible(false), RectMenu(size),
 calendarButton(sf::Vector2f(180, 50), sf::Vector2f(10, 110), "Calendar"),
-homeButton(sf::Vector2f(180, 50), sf::Vector2f(10, 170), "Task"),
+taskButton(sf::Vector2f(180, 50), sf::Vector2f(10, 170), "Task"),
 settingButton(sf::Vector2f(180, 50), sf::Vector2f(10, 230), "Settings")
 {
     RectMenu.setSize(size);
@@ -23,12 +23,12 @@ settingButton(sf::Vector2f(180, 50), sf::Vector2f(10, 230), "Settings")
 
 bool SideMenu::Visible() {
     isVisible = !isVisible;
-    return !isVisible;
+    return isVisible;
 }
 
 StatusProgram SideMenu::isButtonClicked(const sf::Vector2f& mousePosition) const{
-    if (homeButton.checkPress(mousePosition)) {
-        return menu;
+    if (taskButton.checkPress(mousePosition)) {
+        return task;
     }
     else if(calendarButton.checkPress(mousePosition)) {
         return calendar;
@@ -37,7 +37,7 @@ StatusProgram SideMenu::isButtonClicked(const sf::Vector2f& mousePosition) const
         return setting;
     }
     else {
-        return other;
+        return calendar;
     }
 }
 
@@ -47,7 +47,7 @@ void SideMenu::draw(sf::RenderWindow& sideWindow) {
         sideWindow.draw(logo);
         settingButton.draw(sideWindow);
         calendarButton.draw(sideWindow);
-        homeButton.draw(sideWindow);
+        taskButton.draw(sideWindow);
     }
 }
 

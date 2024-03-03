@@ -17,7 +17,7 @@ int main() {
     SetConsoleOutputCP(1251);
 
     StatusProgram statusProgram = calendar;
-
+    bool menuOn = false;
     sf::RenderWindow window(sf::VideoMode(sizeWindowX, sizeWindowY), "DailyTask");
 
     TextBox* mainBox = new TextBox();
@@ -50,21 +50,21 @@ int main() {
                 if (event.key.code == sf::Keyboard::Escape)
                 {
                     std::cout << "Click escape\n";
-                    if (menuSide.Visible()) {
-                        statusProgram = calendar;
-                    }
-                    else {
-                        statusProgram = menu;
-                    }
+                    menuOn = menuSide.Visible();
                 }
             }
             if (event.type == sf::Event::MouseButtonPressed) {
                 if (event.mouseButton.button == sf::Mouse::Left) {
-                    /*Отримуємо позицію миші*/
                     sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-
-                    statusProgram = menuSide.isButtonClicked(mousePosition);
-                    mycalendar->isBoxPressed(mousePosition);
+                    if (menuOn) {
+                        statusProgram = menuSide.isButtonClicked(mousePosition);
+                        break;
+                    }
+                    switch (statusProgram){
+                    case calendar:
+                        mycalendar->isBoxPressed(mousePosition);
+                        break;
+                   }
                 }
             }
         }
@@ -72,19 +72,19 @@ int main() {
         case calendar: {
             window.clear(sf::Color::Black);
             mycalendar->draw(window);
+            if (menuOn) { menuSide.draw(window); }
             window.display();
             break;
         }
-        case menu: {
-            window.clear(sf::Color::Black);
-            mycalendar->draw(window);
-            menuSide.draw(window);
+        case task: {
+            window.clear(sf::Color::White);
+            if (menuOn) { menuSide.draw(window); }
             window.display();
             break;
         }
         case setting: {
             window.clear(sf::Color::White);
-            menuSide.draw(window);
+            if (menuOn) { menuSide.draw(window); }
             window.display();
             break;
         }
