@@ -1,10 +1,11 @@
 #include "SideMenu.h"
 
 
-SideMenu::SideMenu(const sf::Vector2f& size, const sf::Vector2f& position) : TextBox(size, position), isVisible(false),RectMenu(size),
-settingButton(sf::Vector2f(180, 50), sf::Vector2f(10, 230), "Settings"),
-calendarButton(sf::Vector2f(180, 50), sf::Vector2f(10, 170), "Calendar"),
-homeButton(sf::Vector2f(180, 50), sf::Vector2f(10, 110), "Main"){
+SideMenu::SideMenu(const sf::Vector2f& size, const sf::Vector2f& position) : TextBox(size, position), isVisible(false), RectMenu(size),
+calendarButton(sf::Vector2f(180, 50), sf::Vector2f(10, 110), "Calendar"),
+homeButton(sf::Vector2f(180, 50), sf::Vector2f(10, 170), "Task"),
+settingButton(sf::Vector2f(180, 50), sf::Vector2f(10, 230), "Settings")
+{
     RectMenu.setSize(size);
     RectMenu.setPosition(position);
     RectMenu.setFillColor(sf::Color(46, 139, 87));
@@ -12,7 +13,6 @@ homeButton(sf::Vector2f(180, 50), sf::Vector2f(10, 110), "Main"){
     if (logoTexture.loadFromFile("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/logo.png")) {
         logo.setTexture(logoTexture);
     }
-
 }
 
 //bool SideMenu::isButtonClicked(const sf::Vector2f& mousePosition) const {
