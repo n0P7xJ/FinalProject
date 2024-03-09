@@ -36,6 +36,8 @@ static const sf::Font defaultFontText = [] {
     // Other
     static const sf::Vector2f defaultPosition(0.f, 0.f);
 
+   static const std::string daysOfWeek[] = { "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY","SUNDAY"};
+
     enum StatusProgram 
     {
         calendar = 0,

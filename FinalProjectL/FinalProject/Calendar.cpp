@@ -1,6 +1,5 @@
 #include "Calendar.h"
 
-const string Calendar::daysOfWeek[] = { "MONDAY", "TUESDAY", "WEDENESDAY", "THURSDAY", "FRIDAY", "SATURDAY","SUNDAY", };
 
 Calendar::Calendar(TextBox* ptrMainBox, vector<vector<TextBox*>>* ptrMouthBoxList)
 {
@@ -76,15 +75,17 @@ void Calendar::setMouthBoxList(vector<vector<TextBox*>>* ptrMouthBoxList)
         throw(std::runtime_error("PtrMouthBoxList its nullptr"));
 }
 
-void Calendar::isBoxPressed(const sf::Vector2f& mousePosition) const{
+
+TextBox* Calendar::isBoxPressed(const sf::Vector2f& mousePosition) const{
     for (vector<TextBox*> list : (*listBoxWindow)) {
         for (TextBox* itList : list) {
             if (itList->checkPress(mousePosition)) {
                 std::cout << "Press box " + std::string(itList->getString()) + '\n';
-                return;
+                return itList;
             }
         }
     }
+    return nullptr; //якщо не було натиснуто ні на який текстбокс
 }
 
 void Calendar::adjustMouthBoxList() //������������

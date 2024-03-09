@@ -9,8 +9,11 @@
 #include "SideMenu.h"
 #include "settings.h"
 #include "Calendar.h"
-
+#include "ShowTask.h"
 using namespace std;
+
+
+
 
 int main() {
     SetConsoleCP(1251);
@@ -19,7 +22,7 @@ int main() {
     StatusProgram statusProgram = calendar;
     bool menuOn = false;
     sf::RenderWindow window(sf::VideoMode(sizeWindowX, sizeWindowY), "DailyTask");
-
+   
     TextBox* mainBox = new TextBox();
     vector<vector<TextBox*>>* listBoxWindow = new vector<vector<TextBox*>>(lineHorizontX, vector<TextBox*>(lineVetrikalY));
 
@@ -36,6 +39,8 @@ int main() {
 
     window.setVerticalSyncEnabled(true);
 
+    ShowTask myShowTask(sf::Vector2f(0,0), sf::Vector2f(520, 20));
+    //myShowTask.setTaskInfo(systemTime.getMonthName(3), systemTime.getDay(), systemTime.getYear()); // Встановлює поточну дату в  вікні TASK
     //створюю об'єкт класу Days #2 масив
     //Days days(sf::Vector2f(sizeWindowX, sizeBoxY), sf::Vector2f(0, 0), "empty", sf::Color::White, TextBox::defaultFontText, sf::Color::Black, TextBox::defaultCharacterSize);
     //days.setMonthAndYear(systemTime.getMonthName(systemTime.getMonth()), systemTime.getYear(), 40);  // встановлюю місяць і рік
@@ -51,20 +56,52 @@ int main() {
                 {
                     std::cout << "Click escape\n";
                     menuOn = menuSide.Visible();
+                 
                 }
             }
-            if (event.type == sf::Event::MouseButtonPressed) {
-                if (event.mouseButton.button == sf::Mouse::Left) {
+            if (event.type == sf::Event::MouseButtonPressed) 
+            {
+                if (event.mouseButton.button == sf::Mouse::Left) 
+                {
                     sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
                     if (menuOn) {
                         statusProgram = menuSide.isButtonClicked(mousePosition);
                         break;
                     }
-                    switch (statusProgram){
-                    case calendar:
-                        mycalendar->isBoxPressed(mousePosition);
+                    switch (statusProgram) 
+                    {
+                    case calendar: 
+                    {
+                        TextBox* clickBox = mycalendar->isBoxPressed(mousePosition);
+                        if (clickBox != nullptr)
+                        {
+                            if (clickBox->getString() == ""
+                                || clickBox->getString() == "MONDAY"
+                                || clickBox->getString() == "TUESDAY"
+                                || clickBox->getString() == "WEDNESDAY"
+                                || clickBox->getString() == "THURSDAY"
+                                || clickBox->getString() == "FRIDAY"
+                                || clickBox->getString() == "SATURDAY"
+                                || clickBox->getString() == "SUNDAY"
+                                )
+                            {
+                                cout << "Натиснуто на назву дня тижня або пусту комірку" << endl;
+                            }
+                            else 
+                            {
+                                //cout << clickBox->getString().toAnsiString() << systemTime.getMonthName(3) << systemTime.getYear()<< endl;
+                                 int day = stoi(clickBox->getString().toAnsiString());
+                                myShowTask.setTaskInfo(systemTime.getMonthName(3), day, systemTime.getYear()); // Встановлює дату при нажатті на комірки
+                                statusProgram = task;
+                            }
+                        }
+                        else 
+                        {
+                            cout << "Нічого не натиснуто" << endl;
+                        }
                         break;
-                   }
+                        }
+                    }
                 }
             }
         }
@@ -79,6 +116,7 @@ int main() {
         case task: {
             window.clear(sf::Color::White);
             if (menuOn) { menuSide.draw(window); }
+            myShowTask.draw(window);
             window.display();
             break;
         }
