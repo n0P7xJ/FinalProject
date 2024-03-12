@@ -10,6 +10,8 @@
 #include "settings.h"
 #include "Calendar.h"
 #include "ShowTask.h"
+#include "Task.h"'
+#include "TaskManager.h"
 using namespace std;
 
 
@@ -38,8 +40,11 @@ int main() {
     menuSide.setLogoPosition(sf::Vector2f(60, 1));
 
     window.setVerticalSyncEnabled(true);
-
+    
     ShowTask myShowTask(sf::Vector2f(0,0), sf::Vector2f(520, 20));
+    std::vector<Task*>* listTask = new std::vector<Task*>;
+    TaskManager taskManager;
+    taskManager.setlistTask(listTask);
     //myShowTask.setTaskInfo(systemTime.getMonthName(3), systemTime.getDay(), systemTime.getYear()); // Встановлює поточну дату в  вікні TASK
     //створюю об'єкт класу Days #2 масив
     //Days days(sf::Vector2f(sizeWindowX, sizeBoxY), sf::Vector2f(0, 0), "empty", sf::Color::White, TextBox::defaultFontText, sf::Color::Black, TextBox::defaultCharacterSize);
@@ -91,8 +96,15 @@ int main() {
                             {
                                 //cout << clickBox->getString().toAnsiString() << systemTime.getMonthName(3) << systemTime.getYear()<< endl;
                                  int day = stoi(clickBox->getString().toAnsiString());
-                                myShowTask.setTaskInfo(systemTime.getMonthName(3), day, systemTime.getYear()); // Встановлює дату при нажатті на комірки
+                                myShowTask.setDateInfo(systemTime.getMonthName(3), day, systemTime.getYear()); // Встановлює дату при нажатті на комірки
+                                taskManager.readFile("TaskList/12.3.2024.txt");
+                                std::wstring stringTask;
+                                for (Task* task : (*listTask)) {
+                                    stringTask += task->getTask()+L'\n';
+                                }
+                                myShowTask.setTaskInfo(stringTask);
                                 statusProgram = task;
+
                             }
                         }
                         else 
@@ -132,6 +144,7 @@ int main() {
     }
     delete mainBox;
     delete listBoxWindow;
+    delete listTask;
 //   delete mycalendar;
 
     //SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));

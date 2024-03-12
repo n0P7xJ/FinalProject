@@ -30,6 +30,7 @@ static const sf::Font defaultFontText = [] {
     return font;
     }();
     static const std::string defaultString = "";
+    static const std::wstring defaultWstring = L"";
     // Rectangle default value
     static const sf::Color defaultFillColorBox = sf::Color::White;
     static const sf::Vector2f defaultSize(1.f, 1.f);
