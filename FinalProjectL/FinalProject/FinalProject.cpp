@@ -34,14 +34,15 @@ int main() {
 
     SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
     //фон для бічного меню
-    menuSide.setBackground("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/gradient.png");
+    menuSide.setBackground("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/fons.png");
     //логотип калібровка
     menuSide.setLogoSize(sf::Vector2f(100, 100));
     menuSide.setLogoPosition(sf::Vector2f(60, 1));
 
     window.setVerticalSyncEnabled(true);
     
-    ShowTask myShowTask(sf::Vector2f(0,0), sf::Vector2f(520, 20));
+
+    ShowTask myShowTask(sf::Vector2f(0,0), sf::Vector2f(520, 40));
     std::vector<Task*>* listTask = new std::vector<Task*>;
     TaskManager taskManager;
     taskManager.setlistTask(listTask);
@@ -127,7 +128,18 @@ int main() {
         }
         case task: {
             window.clear(sf::Color::White);
+
+            sf::Texture backg;
+            if (!backg.loadFromFile("Image/fon.png"))
+            {
+                throw(std::runtime_error("Не вдалось загрузити файл "));
+            }
+            else {
+                sf::Sprite backgroundSprite(backg);
+                window.draw(backgroundSprite);
+            }
             if (menuOn) { menuSide.draw(window); }
+   
             myShowTask.draw(window);
             window.display();
             break;

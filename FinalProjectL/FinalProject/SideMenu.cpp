@@ -8,7 +8,7 @@ settingButton(sf::Vector2f(180, 50), sf::Vector2f(10, 230), "Settings")
 {
     RectMenu.setSize(size);
     RectMenu.setPosition(position);
-    RectMenu.setFillColor(sf::Color(46, 139, 87));
+    //RectMenu.setFillColor(sf::Color(46, 139, 87));
 
     if (logoTexture.loadFromFile("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/logo.png")) {
         logo.setTexture(logoTexture);
