@@ -88,6 +88,18 @@ TextBox* Calendar::isBoxPressed(const sf::Vector2f& mousePosition) const{
     return nullptr; //якщо не було натиснуто ні на який текстбокс
 }
 
+void Calendar::setCurrentDay(const int& day)
+{
+    for (vector<TextBox*> list : (*listBoxWindow)) {
+        for (TextBox* itList : list) {
+            if (itList->getString() == std::to_string(day)) {
+                itList->sf::Text::setFillColor(sf::Color::Red);
+                return;
+            }
+        }
+    }
+}
+
 void Calendar::adjustMouthBoxList() //������������
 {
     for (int y = 0; y < lineHorizontX; ++y)
