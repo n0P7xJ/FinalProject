@@ -52,8 +52,8 @@ int main() {
     TaskManager taskManager;
     taskManager.setlistTask(listTask);
    
-
-
+    TextBox settingButton(defaultSize,sf::Vector2f(sizeWindowX/2,(sizeWindowY/2)-100));
+    settingButton.setTextProperties("Comming soon", defaultFontText, defaultFillColorText, 50);
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -140,6 +140,10 @@ int main() {
                             break;
                         }
                     }
+                    case setting: {
+                        statusProgram = calendar;
+                        break;
+                    }
                     }
                 }
             }
@@ -176,6 +180,7 @@ int main() {
         case setting: {
             window.clear(sf::Color::White);
             if (menuOn) { menuSide.draw(window); }
+            settingButton.draw(window);
             window.display();
             break;
         }
