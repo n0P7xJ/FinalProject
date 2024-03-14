@@ -64,7 +64,7 @@ int getMonthDay(const int& month, const int& year)
 	return daysInMonth[month];
 }
 
-int SystemTime::getDayOfWeekForFirstDayOfMonth(const int& month) const {
+int SystemTime::getDayOfWeekForFirstDayOfMonth(const int& month,const int& year) const {
 	// Перевірка коректності введених даних
 	if (month < 1 || month > 12) {
 		throw std::invalid_argument("Invalid month number");
@@ -78,7 +78,7 @@ int SystemTime::getDayOfWeekForFirstDayOfMonth(const int& month) const {
 
 	// Встановлення номера місяця
 	firstDayOfMonth.wMonth = month;
-
+	firstDayOfMonth.wYear = year;
 	// Конвертація системного часу в файловий час
 	FILETIME ft;
 	SystemTimeToFileTime(&firstDayOfMonth, &ft);

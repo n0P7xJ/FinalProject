@@ -33,7 +33,7 @@ int main() {
 
     Calendar* mycalendar = new Calendar(mainBox, listBoxWindow);
     mycalendar->setMonthAndYear(systemTime.getMonthName(currentMouth), currentYear, 40);
-    mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentMouth), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth));
+    mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentMouth), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth,currentYear));
     TextBox nextButton(sf::Vector2f(40, 40), sf::Vector2f(1000, 50), "/\\");
     TextBox backButton(sf::Vector2f(40, 40), sf::Vector2f(1050, 50), "\\/");
 
@@ -89,7 +89,7 @@ int main() {
                                 ++currentMouth;
                             }
                             mycalendar->setMonthAndYear(systemTime.getMonthName(currentMouth), currentYear, 40);
-                            mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentMouth), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth));
+                            mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentYear), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth,currentYear));
                         }
                         else if (backButton.checkPress(mousePosition)) {
                             if (currentMouth - 1 <= 0) {
@@ -100,7 +100,7 @@ int main() {
                                 --currentMouth;
                             }
                             mycalendar->setMonthAndYear(systemTime.getMonthName(currentMouth), currentYear, 40);
-                            mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentMouth), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth));
+                            mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentYear), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth,currentYear));
                         }
                         else {
                             TextBox* clickBox = mycalendar->isBoxPressed(mousePosition);

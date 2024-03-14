@@ -21,7 +21,7 @@ public:
 	
 	std::string getMonthName(const int&) const; //����� ��� ��������� ��'� �����
 
-	int getDayOfWeekForFirstDayOfMonth(const int& month) const; //����� ���� ������� ��������������� ������� ��� ����� �� ����������� ��������
+	int getDayOfWeekForFirstDayOfMonth(const int& month, const int& year) const; //����� ���� ������� ��������������� ������� ��� ����� �� ����������� ��������
 
 	void OutputCLOCK(); //������� ��� ������ ���� �� ���� (��� � .��� ����)
 };
