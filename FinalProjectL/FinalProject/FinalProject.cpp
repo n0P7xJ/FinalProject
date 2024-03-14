@@ -23,7 +23,7 @@ int main() {
 
     int currentYear = systemTime.getYear();
     int currentMouth = systemTime.getMonth();
-
+    int currentDay = systemTime.getDay();
     StatusProgram statusProgram = calendar;
     bool menuOn = false;
     sf::RenderWindow window(sf::VideoMode(sizeWindowX, sizeWindowY), "DailyTask");
@@ -34,7 +34,6 @@ int main() {
     Calendar* mycalendar = new Calendar(mainBox, listBoxWindow);
     mycalendar->setMonthAndYear(systemTime.getMonthName(currentMouth), currentYear, 40);
     mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentMouth), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth));
-
     TextBox nextButton(sf::Vector2f(40, 40), sf::Vector2f(1000, 50), "/\\");
     TextBox backButton(sf::Vector2f(40, 40), sf::Vector2f(1050, 50), "\\/");
 
@@ -52,11 +51,7 @@ int main() {
     std::vector<Task*>* listTask = new std::vector<Task*>;
     TaskManager taskManager;
     taskManager.setlistTask(listTask);
-    //myShowTask.setTaskInfo(systemTime.getMonthName(3), systemTime.getDay(), systemTime.getYear()); // Встановлює поточну дату в  вікні TASK
-    //створюю об'єкт класу Days #2 масив
-    //Days days(sf::Vector2f(sizeWindowX, sizeBoxY), sf::Vector2f(0, 0), "empty", sf::Color::White, TextBox::defaultFontText, sf::Color::Black, TextBox::defaultCharacterSize);
-    //days.setMonthAndYear(systemTime.getMonthName(systemTime.getMonth()), systemTime.getYear(), 40);  // встановлюю місяць і рік
-    //days.setDaysOfMonth(getMonthDay());
+   myShowTask.setDateInfo(systemTime.getMonthName(currentMouth), currentDay, currentYear); // Встановлює поточну дату в  вікні TASK
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -123,9 +118,8 @@ int main() {
                                 }
                                 else
                                 {
-                                    //cout << clickBox->getString().toAnsiString() << systemTime.getMonthName(3) << systemTime.getYear()<< endl;
                                     int day = stoi(clickBox->getString().toAnsiString());
-                                    myShowTask.setDateInfo(systemTime.getMonthName(3), day, systemTime.getYear()); // Встановлює дату при нажатті на комірки
+                                    myShowTask.setDateInfo(systemTime.getMonthName(currentMouth), day, systemTime.getYear()); // Встановлює дату при нажатті на комірки
                                     taskManager.readFile("TaskList/" + clickBox->getString() + '.' + std::to_string(currentMouth) + '.' + std::to_string(currentYear) + ".txt");
                                     std::wstring stringTask;
                                     for (Task* task : (*listTask)) {
@@ -134,6 +128,7 @@ int main() {
                                     if (stringTask.empty()) { stringTask = L"empty"; }
                                     myShowTask.setTaskInfo(stringTask);
                                     statusProgram = task;
+
                                 }
                             }
                             else
@@ -152,6 +147,7 @@ int main() {
             window.clear(sf::Color::Black);
             mycalendar->draw(window);
             if (menuOn) { menuSide.draw(window); }
+            if(systemTime.getYear() == currentYear && systemTime.getMonth() == currentMouth){ mycalendar->setCurrentDay(currentDay); }
             nextButton.draw(window);
             backButton.draw(window);
             window.display();

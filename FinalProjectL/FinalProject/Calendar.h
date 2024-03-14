@@ -21,6 +21,7 @@ public:
     void setMainBox(TextBox* ptrMainBox); //���������� �������� �� �������� �����������(MainBox)
     void setMouthBoxList(vector<vector<TextBox*>>* ptrMouthBoxList); // ���������� �������� �� ����� ������������
     TextBox* isBoxPressed(const sf::Vector2f& mousePosition) const;
+    void setCurrentDay(const int& day);
 protected:
     void adjustMouthBoxList(); //��������� ��������� ������������
     void adjustMainBox(); //��������� ��������� ��������� ������������
