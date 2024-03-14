@@ -21,6 +21,9 @@ int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
+    int currentYear = systemTime.getYear();
+    int currentMouth = systemTime.getMonth();
+
     StatusProgram statusProgram = calendar;
     bool menuOn = false;
     sf::RenderWindow window(sf::VideoMode(sizeWindowX, sizeWindowY), "DailyTask");
@@ -29,8 +32,11 @@ int main() {
     vector<vector<TextBox*>>* listBoxWindow = new vector<vector<TextBox*>>(lineHorizontX, vector<TextBox*>(lineVetrikalY));
 
     Calendar* mycalendar = new Calendar(mainBox, listBoxWindow);
-    mycalendar->setMonthAndYear(systemTime.getMonthName(3), systemTime.getYear(), 40);
-    mycalendar->setDaysOfMonth(getMonthDay(3, systemTime.getYear()), systemTime.getDayOfWeekForFirstDayOfMonth(3));
+    mycalendar->setMonthAndYear(systemTime.getMonthName(currentMouth), currentYear, 40);
+    mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentMouth), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth));
+
+    TextBox nextButton(sf::Vector2f(40, 40), sf::Vector2f(1000, 50), "/\\");
+    TextBox backButton(sf::Vector2f(40, 40), sf::Vector2f(1050, 50), "\\/");
 
     SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
     //фон для бічного меню
@@ -74,46 +80,68 @@ int main() {
                         statusProgram = menuSide.isButtonClicked(mousePosition);
                         break;
                     }
-                    switch (statusProgram) 
+                    switch (statusProgram)
                     {
-                    case calendar: 
-                    {
-                        TextBox* clickBox = mycalendar->isBoxPressed(mousePosition);
-                        if (clickBox != nullptr)
-                        {
-                            if (clickBox->getString() == ""
-                                || clickBox->getString() == "MONDAY"
-                                || clickBox->getString() == "TUESDAY"
-                                || clickBox->getString() == "WEDNESDAY"
-                                || clickBox->getString() == "THURSDAY"
-                                || clickBox->getString() == "FRIDAY"
-                                || clickBox->getString() == "SATURDAY"
-                                || clickBox->getString() == "SUNDAY"
-                                )
-                            {
-                                cout << "Натиснуто на назву дня тижня або пусту комірку" << endl;
+                    case calendar: {
+                        if (nextButton.checkPress(mousePosition)) {
+                            if (currentMouth + 1 == 13) {
+                                currentMouth = 1;
+                                ++currentYear;
                             }
-                            else 
+                            else {
+                                ++currentMouth;
+                            }
+                            mycalendar->setMonthAndYear(systemTime.getMonthName(currentMouth), currentYear, 40);
+                            mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentMouth), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth));
+                        }
+                        else if (backButton.checkPress(mousePosition)) {
+                            if (currentMouth - 1 <= 0) {
+                                currentMouth = 12;
+                                --currentYear;
+                            }
+                            else {
+                                --currentMouth;
+                            }
+                            mycalendar->setMonthAndYear(systemTime.getMonthName(currentMouth), currentYear, 40);
+                            mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentMouth), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth));
+                        }
+                        else {
+                            TextBox* clickBox = mycalendar->isBoxPressed(mousePosition);
+                            if (clickBox != nullptr)
                             {
-                                //cout << clickBox->getString().toAnsiString() << systemTime.getMonthName(3) << systemTime.getYear()<< endl;
-                                 int day = stoi(clickBox->getString().toAnsiString());
-                                myShowTask.setDateInfo(systemTime.getMonthName(3), day, systemTime.getYear()); // Встановлює дату при нажатті на комірки
-                                taskManager.readFile("TaskList/12.3.2024.txt");
-                                std::wstring stringTask;
-                                for (Task* task : (*listTask)) {
-                                    stringTask += task->getTask()+L'\n';
+                                if (clickBox->getString() == ""
+                                    || clickBox->getString() == "MONDAY"
+                                    || clickBox->getString() == "TUESDAY"
+                                    || clickBox->getString() == "WEDNESDAY"
+                                    || clickBox->getString() == "THURSDAY"
+                                    || clickBox->getString() == "FRIDAY"
+                                    || clickBox->getString() == "SATURDAY"
+                                    || clickBox->getString() == "SUNDAY"
+                                    )
+                                {
+                                    cout << "Натиснуто на назву дня тижня або пусту комірку" << endl;
                                 }
-                                myShowTask.setTaskInfo(stringTask);
-                                statusProgram = task;
-
+                                else
+                                {
+                                    //cout << clickBox->getString().toAnsiString() << systemTime.getMonthName(3) << systemTime.getYear()<< endl;
+                                    int day = stoi(clickBox->getString().toAnsiString());
+                                    myShowTask.setDateInfo(systemTime.getMonthName(3), day, systemTime.getYear()); // Встановлює дату при нажатті на комірки
+                                    taskManager.readFile("TaskList/12.3.2024.txt");
+                                    std::wstring stringTask;
+                                    for (Task* task : (*listTask)) {
+                                        stringTask += task->getTask() + L'\n';
+                                    }
+                                    myShowTask.setTaskInfo(stringTask);
+                                    statusProgram = task;
+                                }
                             }
+                            else
+                            {
+                                cout << "Nothing is pressed" << endl;
+                            }
+                            break;
                         }
-                        else 
-                        {
-                            cout << "Нічого не натиснуто" << endl;
-                        }
-                        break;
-                        }
+                    }
                     }
                 }
             }
@@ -123,6 +151,8 @@ int main() {
             window.clear(sf::Color::Black);
             mycalendar->draw(window);
             if (menuOn) { menuSide.draw(window); }
+            nextButton.draw(window);
+            backButton.draw(window);
             window.display();
             break;
         }
