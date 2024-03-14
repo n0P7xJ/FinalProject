@@ -39,7 +39,7 @@ int main() {
 
     SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
     //фон для бічного меню
-    menuSide.setBackground("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/fons.png");
+    menuSide.setBackground(fonsPNG);
     //логотип калібровка
     menuSide.setLogoSize(sf::Vector2f(100, 100));
     menuSide.setLogoPosition(sf::Vector2f(60, 1));
@@ -51,7 +51,9 @@ int main() {
     std::vector<Task*>* listTask = new std::vector<Task*>;
     TaskManager taskManager;
     taskManager.setlistTask(listTask);
-   myShowTask.setDateInfo(systemTime.getMonthName(currentMouth), currentDay, currentYear); // Встановлює поточну дату в  вікні TASK
+   
+
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -147,7 +149,7 @@ int main() {
             window.clear(sf::Color::Black);
             mycalendar->draw(window);
             if (menuOn) { menuSide.draw(window); }
-            if(systemTime.getYear() == currentYear && systemTime.getMonth() == currentMouth){ mycalendar->setCurrentDay(currentDay); }
+            if (systemTime.getYear() == currentYear && systemTime.getMonth() == currentMouth) { mycalendar->setCurrentDay(currentDay); myShowTask.setDateInfo(systemTime.getMonthName(currentMouth), currentDay, currentYear); } // Встановлює поточну дату в  вікні TASK}
             nextButton.draw(window);
             backButton.draw(window);
             window.display();
@@ -157,7 +159,7 @@ int main() {
             window.clear(sf::Color::White);
 
             sf::Texture backg;
-            if (!backg.loadFromFile("Image/fon.png"))
+            if (!backg.loadFromFile(fonPNG))
             {
                 throw(std::runtime_error("Не вдалось загрузити файл "));
             }
@@ -184,71 +186,6 @@ int main() {
     delete mainBox;
     delete listBoxWindow;
     delete listTask;
-//   delete mycalendar;
-
-    //SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
-    ////фон для бічного меню
-    //menuSide.setBackground("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/gradient.png");
-
-    ////логотип #1 калібровка
-    //menuSide.setLogoSize(sf::Vector2f(100, 100));
-    //menuSide.setLogoPosition(sf::Vector2f(60, 1));
-
-    //window.setVerticalSyncEnabled(true);
-
-    //while (window.isOpen()) {
-    //    sf::Event event;
-    //    while (window.pollEvent(event)) {
-    //        if (event.type == sf::Event::Closed)
-    //            window.close();
-    //        if (event.type == sf::Event::KeyPressed)
-    //        {
-    //            if (event.key.code == sf::Keyboard::Escape)
-    //            {
-    //                menuSide.Visible();
-    //            }
-    //        }
-    //        if (event.type == sf::Event::MouseButtonPressed) {
-    //            if (event.mouseButton.button == sf::Mouse::Left) {
-    //                // Отримуємо позицію миші
-    //                sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-    //  
-    //                if (menuSide.calendarButton.checkPress(mousePosition)) {
-    //                    cout << "Calendar button clicked" << endl;
-    //  
-    //                }
-    //                else if (menuSide.settingButton.checkPress(mousePosition)) {
-    //                    cout << "Settings button clicked" << endl;
-    //                
-    //                }
-    //                else if (menuSide.homeButton.checkPress(mousePosition)) {
-    //                   cout << "Home button clicked" << endl;
-    //                 
-    //                }
-    //                // Перевіряємо, чи натиснуто на прямокутник
-    //                /*bool search = false;
-    //                for (std::vector<TextBox*> listBox : days.getList()) {
-    //                    if (search) {
-    //                        for (TextBox* box : listBox) {
-    //                            if (box->checkPress(mousePosition)) {
-    //                                std::cout << "Rectangle clicked!" << std::endl;
-    //                                search = false;
-    //                            }
-    //                        }
-    //                    }
-    //                    else {
-    //                        search = true;
-    //                    }
-    //                }*/
-    //            }
-    //        }
-    //    }
-    //    window.clear();
-    //    /*days.draw(window);*/
-    //    //меню бічне
-    //    menuSide.draw(window);
-    //    window.display();
-    //}
 
     return 0;
 }

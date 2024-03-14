@@ -17,7 +17,9 @@
 #define sizeBoxX sizeWindowX/lineHorizontX
 #define sizeBoxMainY sizeWindowY/8  // 111
 #define sizeBoxY (sizeWindowY-sizeBoxMainY)/lineVetrikalY
-
+//Road to files
+#define fonsPNG "Image/fons.png"
+#define fonPNG "Image/fon.png"
 //TextBox
 // Text default value
 static const unsigned int defaultCharacterSize = 20;
