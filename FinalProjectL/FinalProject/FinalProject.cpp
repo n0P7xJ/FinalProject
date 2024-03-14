@@ -9,33 +9,50 @@
 #include "SideMenu.h"
 #include "settings.h"
 #include "Calendar.h"
-
+#include "ShowTask.h"
+#include "Task.h"'
+#include "TaskManager.h"
 using namespace std;
+
+
+
 
 int main() {
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
 
+    int currentYear = systemTime.getYear();
+    int currentMouth = systemTime.getMonth();
+
     StatusProgram statusProgram = calendar;
-
+    bool menuOn = false;
     sf::RenderWindow window(sf::VideoMode(sizeWindowX, sizeWindowY), "DailyTask");
-
+   
     TextBox* mainBox = new TextBox();
-    vector<vector<TextBox*>>* listBoxWindow = new vector<vector<TextBox*>>(lineHorizont, vector<TextBox*>(lineVetrikal));
+    vector<vector<TextBox*>>* listBoxWindow = new vector<vector<TextBox*>>(lineHorizontX, vector<TextBox*>(lineVetrikalY));
 
     Calendar* mycalendar = new Calendar(mainBox, listBoxWindow);
-    mycalendar->setMonthAndYear(systemTime.getMonthName(systemTime.getMonth()), systemTime.getYear(), 40);
-    mycalendar->setDaysOfMonth(getMonthDay(systemTime), systemTime.getDayOfWeekForFirstDayOfMonth());
+    mycalendar->setMonthAndYear(systemTime.getMonthName(currentMouth), currentYear, 40);
+    mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentMouth), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth));
+
+    TextBox nextButton(sf::Vector2f(40, 40), sf::Vector2f(1000, 50), "/\\");
+    TextBox backButton(sf::Vector2f(40, 40), sf::Vector2f(1050, 50), "\\/");
 
     SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));
     //фон для бічного меню
-    menuSide.setBackground("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/gradient.png");
+    menuSide.setBackground("C:/Program Files/FinalProject/FinalProjectL/FinalProject/Image/fons.png");
     //логотип калібровка
     menuSide.setLogoSize(sf::Vector2f(100, 100));
     menuSide.setLogoPosition(sf::Vector2f(60, 1));
 
     window.setVerticalSyncEnabled(true);
+    
 
+    ShowTask myShowTask(sf::Vector2f(0,0), sf::Vector2f(520, 40));
+    std::vector<Task*>* listTask = new std::vector<Task*>;
+    TaskManager taskManager;
+    taskManager.setlistTask(listTask);
+    //myShowTask.setTaskInfo(systemTime.getMonthName(3), systemTime.getDay(), systemTime.getYear()); // Встановлює поточну дату в  вікні TASK
     //створюю об'єкт класу Days #2 масив
     //Days days(sf::Vector2f(sizeWindowX, sizeBoxY), sf::Vector2f(0, 0), "empty", sf::Color::White, TextBox::defaultFontText, sf::Color::Black, TextBox::defaultCharacterSize);
     //days.setMonthAndYear(systemTime.getMonthName(systemTime.getMonth()), systemTime.getYear(), 40);  // встановлюю місяць і рік
@@ -50,21 +67,82 @@ int main() {
                 if (event.key.code == sf::Keyboard::Escape)
                 {
                     std::cout << "Click escape\n";
-                    if (menuSide.Visible()) {
-                        statusProgram = calendar;
-                    }
-                    else {
-                        statusProgram = menu;
-                    }
+                    menuOn = menuSide.Visible();
+                 
                 }
             }
-            if (event.type == sf::Event::MouseButtonPressed) {
-                if (event.mouseButton.button == sf::Mouse::Left) {
-                    /*Отримуємо позицію миші*/
+            if (event.type == sf::Event::MouseButtonPressed) 
+            {
+                if (event.mouseButton.button == sf::Mouse::Left) 
+                {
                     sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-
-                    statusProgram = menuSide.isButtonClicked(mousePosition);
-                    mycalendar->isBoxPressed(mousePosition);
+                    if (menuOn) {
+                        statusProgram = menuSide.isButtonClicked(mousePosition);
+                        break;
+                    }
+                    switch (statusProgram)
+                    {
+                    case calendar: {
+                        if (nextButton.checkPress(mousePosition)) {
+                            if (currentMouth + 1 == 13) {
+                                currentMouth = 1;
+                                ++currentYear;
+                            }
+                            else {
+                                ++currentMouth;
+                            }
+                            mycalendar->setMonthAndYear(systemTime.getMonthName(currentMouth), currentYear, 40);
+                            mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentMouth), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth));
+                        }
+                        else if (backButton.checkPress(mousePosition)) {
+                            if (currentMouth - 1 <= 0) {
+                                currentMouth = 12;
+                                --currentYear;
+                            }
+                            else {
+                                --currentMouth;
+                            }
+                            mycalendar->setMonthAndYear(systemTime.getMonthName(currentMouth), currentYear, 40);
+                            mycalendar->setDaysOfMonth(getMonthDay(currentMouth, currentMouth), systemTime.getDayOfWeekForFirstDayOfMonth(currentMouth));
+                        }
+                        else {
+                            TextBox* clickBox = mycalendar->isBoxPressed(mousePosition);
+                            if (clickBox != nullptr)
+                            {
+                                if (clickBox->getString() == ""
+                                    || clickBox->getString() == "MONDAY"
+                                    || clickBox->getString() == "TUESDAY"
+                                    || clickBox->getString() == "WEDNESDAY"
+                                    || clickBox->getString() == "THURSDAY"
+                                    || clickBox->getString() == "FRIDAY"
+                                    || clickBox->getString() == "SATURDAY"
+                                    || clickBox->getString() == "SUNDAY"
+                                    )
+                                {
+                                    cout << "Натиснуто на назву дня тижня або пусту комірку" << endl;
+                                }
+                                else
+                                {
+                                    //cout << clickBox->getString().toAnsiString() << systemTime.getMonthName(3) << systemTime.getYear()<< endl;
+                                    int day = stoi(clickBox->getString().toAnsiString());
+                                    myShowTask.setDateInfo(systemTime.getMonthName(3), day, systemTime.getYear()); // Встановлює дату при нажатті на комірки
+                                    taskManager.readFile("TaskList/12.3.2024.txt");
+                                    std::wstring stringTask;
+                                    for (Task* task : (*listTask)) {
+                                        stringTask += task->getTask() + L'\n';
+                                    }
+                                    myShowTask.setTaskInfo(stringTask);
+                                    statusProgram = task;
+                                }
+                            }
+                            else
+                            {
+                                cout << "Nothing is pressed" << endl;
+                            }
+                            break;
+                        }
+                    }
+                    }
                 }
             }
         }
@@ -72,19 +150,33 @@ int main() {
         case calendar: {
             window.clear(sf::Color::Black);
             mycalendar->draw(window);
+            if (menuOn) { menuSide.draw(window); }
+            nextButton.draw(window);
+            backButton.draw(window);
             window.display();
             break;
         }
-        case menu: {
-            window.clear(sf::Color::Black);
-            mycalendar->draw(window);
-            menuSide.draw(window);
+        case task: {
+            window.clear(sf::Color::White);
+
+            sf::Texture backg;
+            if (!backg.loadFromFile("Image/fon.png"))
+            {
+                throw(std::runtime_error("Не вдалось загрузити файл "));
+            }
+            else {
+                sf::Sprite backgroundSprite(backg);
+                window.draw(backgroundSprite);
+            }
+            if (menuOn) { menuSide.draw(window); }
+   
+            myShowTask.draw(window);
             window.display();
             break;
         }
         case setting: {
             window.clear(sf::Color::White);
-            menuSide.draw(window);
+            if (menuOn) { menuSide.draw(window); }
             window.display();
             break;
         }
@@ -94,6 +186,7 @@ int main() {
     }
     delete mainBox;
     delete listBoxWindow;
+    delete listTask;
 //   delete mycalendar;
 
     //SideMenu menuSide(sf::Vector2f(200, window.getSize().y), sf::Vector2f(0, 0));

@@ -24,7 +24,7 @@ public:
 	StatusProgram isButtonClicked(const sf::Vector2f& mousePosition) const;
 
 protected:
-	TextBox homeButton;
+	TextBox taskButton;
 	TextBox calendarButton;
 	TextBox settingButton;
 private:

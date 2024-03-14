@@ -7,15 +7,16 @@
 
 //Параметри вікна
 #define sizeWindowX 1176
-#define sizeWindowY 770
-
-//Параметри бокса при співідношині 6:7
-#define sizeBoxX 168
-#define sizeBoxY 110
+#define sizeWindowY 872
 
 //Лінії для масива 
-#define lineHorizont  6
-#define lineVetrikal  7
+#define lineHorizontX  7
+#define lineVetrikalY  7
+
+//Параметри бокса при співідношині 7:7
+#define sizeBoxX sizeWindowX/lineHorizontX
+#define sizeBoxMainY sizeWindowY/8  // 111
+#define sizeBoxY (sizeWindowY-sizeBoxMainY)/lineVetrikalY
 
 //TextBox
 // Text default value
@@ -29,11 +30,14 @@ static const sf::Font defaultFontText = [] {
     return font;
     }();
     static const std::string defaultString = "";
+    static const std::wstring defaultWstring = L"";
     // Rectangle default value
     static const sf::Color defaultFillColorBox = sf::Color::White;
     static const sf::Vector2f defaultSize(1.f, 1.f);
     // Other
     static const sf::Vector2f defaultPosition(0.f, 0.f);
+
+   static const std::string daysOfWeek[] = { "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY","SUNDAY"};
 
     enum StatusProgram 
     {
@@ -45,3 +49,6 @@ static const sf::Font defaultFontText = [] {
     };
 
     static const SystemTime systemTime;
+
+
+
