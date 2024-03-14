@@ -126,11 +126,12 @@ int main() {
                                     //cout << clickBox->getString().toAnsiString() << systemTime.getMonthName(3) << systemTime.getYear()<< endl;
                                     int day = stoi(clickBox->getString().toAnsiString());
                                     myShowTask.setDateInfo(systemTime.getMonthName(3), day, systemTime.getYear()); // Встановлює дату при нажатті на комірки
-                                    taskManager.readFile("TaskList/12.3.2024.txt");
+                                    taskManager.readFile("TaskList/" + clickBox->getString() + '.' + std::to_string(currentMouth) + '.' + std::to_string(currentYear) + ".txt");
                                     std::wstring stringTask;
                                     for (Task* task : (*listTask)) {
                                         stringTask += task->getTask() + L'\n';
                                     }
+                                    if (stringTask.empty()) { stringTask = L"empty"; }
                                     myShowTask.setTaskInfo(stringTask);
                                     statusProgram = task;
                                 }
