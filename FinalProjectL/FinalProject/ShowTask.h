@@ -11,12 +11,14 @@ public:
 	void setTaskInfo(const std::wstring& task);
 	void setRectangles(const sf::Vector2f& size, const sf::Vector2f& position, const sf::Color fillColor);
 	void InSetRectangles(const sf::Vector2f& size, const sf::Vector2f& position, const sf::Color fillColor);
+	bool pressCreateButton(sf::Vector2f mousePosition) const;
+	bool pressDeleteButton(sf::Vector2f mousePosition) const;
 protected:
 	sf::Text dateText;
 	sf::Text taskText;
 	TextBox createTaskButton;
 	TextBox deleteTaskButton;
 	sf::RectangleShape rectangle;
-	sf::RectangleShape inRectangle; //в прямокутнику
+	sf::RectangleShape inRectangle; //пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 };
 

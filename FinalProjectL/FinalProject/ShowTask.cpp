@@ -68,3 +68,13 @@ void ShowTask::InSetRectangles(const sf::Vector2f& size, const sf::Vector2f& pos
 	inRectangle.setOutlineThickness(2.0f);
 }
 
+bool ShowTask::pressCreateButton(sf::Vector2f mousePosition) const
+{
+	return createTaskButton.checkPress(mousePosition);
+}
+
+bool ShowTask::pressDeleteButton(sf::Vector2f mousePosition) const
+{
+	return deleteTaskButton.checkPress(mousePosition);
+}
+

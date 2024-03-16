@@ -27,7 +27,7 @@ int main() {
     StatusProgram statusProgram = calendar;
     bool menuOn = false;
     sf::RenderWindow window(sf::VideoMode(sizeWindowX, sizeWindowY), "DailyTask");
-   
+    sf::RenderWindow inputWindow(sf::VideoMode(sizeWindowX/3, sizeWindowY/3), "Input",sf::Style::Close);
     TextBox* mainBox = new TextBox();
     vector<vector<TextBox*>>* listBoxWindow = new vector<vector<TextBox*>>(lineHorizontX, vector<TextBox*>(lineVetrikalY));
 
@@ -137,6 +137,46 @@ int main() {
                             {
                                 cout << "Nothing is pressed" << endl;
                             }
+                            break;
+                        }
+                    }
+                    case task: {
+                        if (myShowTask.pressCreateButton(mousePosition)) {
+                            while (inputWindow.isOpen()) {
+                                sf::Event event;
+                                while (inputWindow.pollEvent(event)) {
+                                    if (event.type == sf::Event::Closed)
+                                        std::cout << "Cliked input window\n";
+                                        inputWindow.close();
+                                }
+                                while (window.pollEvent(event)){
+                                    if (event.type == sf::Event::Closed)
+                                        window.close();
+                                }
+                                inputWindow.clear(sf::Color::White);
+                                inputWindow.display();
+                            }
+                            break;
+                        }
+                        else if (myShowTask.pressDeleteButton(mousePosition)) {
+                            while (inputWindow.isOpen()) {
+                                sf::Event event;
+                                while (inputWindow.pollEvent(event)) {
+                                    if (event.type == sf::Event::Closed)
+                                        std::cout << "Cliked input window\n";
+                                    inputWindow.close();
+                                }
+                                while (window.pollEvent(event)) {
+                                    if (event.type == sf::Event::Closed)
+                                        window.close();
+                                }
+                                inputWindow.clear(sf::Color::White);
+                                inputWindow.display();
+                            }
+                            break;
+                        }
+                        else
+                        {
                             break;
                         }
                     }
